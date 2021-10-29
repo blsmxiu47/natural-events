@@ -1,53 +1,65 @@
 <template>
-  <!-- <div> -->
-    <!-- <ul v-for="e in eventData.events" v-bind:key="e.id">
-      <li>{{ e.id }}</li>
-      <p>{{ e.title }}</p>
-    </ul> -->
-    <!-- <table>
-      <tr>
-        <th>Event ID</th>
-        <th>Event Title</th>
-        <th>Event Date/Time</th>
-        <th>Link</th>
-        <th>Sources</th>
-        <th>Source URL</th>
-      </tr>  
-    </table> -->
     <div>
       <v-data-table
         :headers="headers"
-        :items="eventData"
+        :items="events"
         item-key="id"
         class="elevation-1"
       >
       </v-data-table>
     </div>
-  <!-- </div> -->
 </template>
 
 <script>
-import getData from './Events.vue'
-
-// data: eupdated ventData (from events.vue)
-
 export default {
   name: 'EventsLog',
+  props: ['events'],
   data () {
     return {
-      eventData: getData(),
+      eventsData: [],
+    }
+  },
+  methods: {
+    setEvents (events) {
+      console.log('setEvents...')
+      this.eventsData = events
+      // console.log(events)
+      for(let i = 0; i < events.length; i++) {
+        // console.log('loop events, ', i)
+        // console.log('categories: ', events[i].categories)
+        // console.log('categories type: ', typeof events[i].categories)
+        if (events[i].categories.constructor === Array) {
+          events[i].categories = events[i].categories.map(el => el.title).join()
+        }
+
+        // console.log("sources type: ", typeof events[i].sources)
+        // console.log("sources: ", events[i].sources)
+        if (events[i].sources.constructor === Array) {
+          events[i].sources = events[i].sources.map(el => el.id).join();
+        }
+
+        events[i].dateTimes = events[i].geometry.map(el => el.date).join(' | ')
+        // console.log(events[i].dateTimes)
+
+        events[i].geo = events[i].geometry.map(el => '[' + [el.coordinates[1], el.coordinates[0]].join() + ']').join(' | ');
+        // console.log(events[i].geo)
+      }
     }
   },
   computed: {
     headers () {
       return [
         {text: 'Event ID', value: 'id'},
+        {text: 'Category', value: 'categories'},
         {text: 'Event Name', value: 'title'},
-        {text: 'Event Date/Time', value: 'date'},
+        {text: 'Event Date/Time', value: 'dateTimes'},
         {text: 'Link', value: 'link'},
         {text: 'Sources', value: 'sources'},
       ]
     }
   },
+    mounted () {
+    this.setEvents(this.events)
+  }
 }
 </script>

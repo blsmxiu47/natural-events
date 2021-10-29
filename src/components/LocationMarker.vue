@@ -1,5 +1,5 @@
 <template>
-  <l-marker :lat-lng="markerLatLng">
+  <l-marker :lat-lng="markerCoordinates">
       <l-icon>
         <div class="location-marker">
           <Icon icon="el:fire" class="location-icon" />
@@ -16,17 +16,17 @@ export default {
   name: 'LocationMarker',
   props: {
     lat: Number, 
-    lng: Number
+    lng: Number,
   },
   components: {
     Icon,
     LMarker,
     LIcon,
   },
-  // data () {
-  //   return {
-  //     markerLatLng: [lat, lng]
-  //   }
-  // }
+  computed: {
+      markerCoordinates () {
+        return [this.lat, this.lng]
+      }
+  }
 }
 </script>
