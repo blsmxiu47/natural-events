@@ -31,7 +31,7 @@ export default {
         // this.eventData = await fetch("https://eonet.sci.gsfc.nasa.gov/api/v3/events?limit=5&days=20&category=wildfires")
         //   .then(response => response.json())
         //   .then(data => data.events);
-        let res = await fetch(`${this.url_base}events?limit=5&days=20&category=${this.category}&api_key=${this.api_key}`);
+        let res = await fetch(`${this.url_base}events?status=open&category=${this.category}&api_key=${this.api_key}`);
         console.log(res)
         const events = await res.json();
         // for (let i = 0; i < events.length; i++) {

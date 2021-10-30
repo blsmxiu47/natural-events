@@ -1,8 +1,14 @@
 <template>
   <l-map style="height: 500px" :zoom="zoom" :center="center">
     <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-    <LocationMarker :lat="lat" :lng="lng" />
-    {{ markers }}
+    <!-- <LocationMarker :latlng="latlng" /> -->
+    <template v-for="marker in markers">
+      <component :is="marker" :key="marker.id"></component>
+    </template>
+    <!-- <component :is="MarkerComponent" v-bind:latlng="[10, 30]" /> -->
+    <!-- <div v-for="marker in markers" :key="marker.id">
+    {{ marker }}
+    </div> -->
     <!-- <l-marker :lat-lng="markerLatLng">
         <l-icon>{{ markers }}</l-icon>
         <l-icon><LocationMarker /></l-icon>
@@ -13,7 +19,7 @@
 <script>
 import { LMap, LTileLayer } from 'vue2-leaflet';
 import LocationMarker from './LocationMarker.vue';
-// import Vue from 'vue';
+import Vue from 'vue';
 // import eventData from './Events.vue';
 
 // data: updated coordinates from Events.vue
@@ -35,9 +41,19 @@ export default {
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       zoom: 3,
       center: [0, 0],
-      lat: 0,
-      lng: 0,
+      latlng: [0, 0],
       markers: [],
+    }
+  },
+  computed: {
+    MarkerComponent (category) {
+      if (category === "wildfires") {
+        return LocationMarker; // these will eventually be components specific to each natural event we're interested in
+      } else if (category === "hurricane") {
+        return LocationMarker;
+      } else {
+        return LocationMarker;
+      }
     }
   },
   methods: {
@@ -68,18 +84,34 @@ export default {
       // console.log("miih", myiconhtml)
       // return string.replace('icon', myiconhtml)
 
-      // var ComponentClass = Vue.extend(LocationMarker)
-      // var instance = new ComponentClass({
-      //     propsData: { lat: -10, lng: 10 }
-      // })
+      const ComponentClass = Vue.extend(LocationMarker)
+      console.log(ComponentClass)
       // instance.$mount() // pass nothing
       // this.$refs.container.appendChild(instance.$el)
 
       const markers = events.map(el => {
         // console.log(el.categories)
         if (el.categories[0].id === "wildfires") {
-          
-          return <LocationMarker lat={el.geometry[0].coordinates[1]} lng={el.geometry[0].coordinates[1]} /> // this isn't allowed in Vue :/, returns undefined
+          // return [el.geometry[0].coordinates[1], el.geometry[0].coordinates[0]]
+          // let instance = new ComponentClass({
+          //   propsData: { latlng: [el.geometry[0].coordinates[1], el.geometry[0].coordinates[0]] },
+          //   render () {
+          //     return <LocationMarker latlng={[el.geometry[0].coordinates[1], el.geometry[0].coordinates[1]]} />
+          //   }
+          // })
+          let instance = Vue.component('iconrender', {
+            data () {
+              return {
+                latlng: [el.geometry[0].coordinates[1], el.geometry[0].coordinates[0]]
+              }
+            },
+            render () {
+              return <LocationMarker latlng={[el.geometry[0].coordinates[1], el.geometry[0].coordinates[0]]} />
+            }
+          })
+          console.log(instance)
+          return instance
+          // return <LocationMarker lat={el.geometry[0].coordinates[1]} lng={el.geometry[0].coordinates[1]} /> // this isn't allowed in Vue :/, returns undefined
           // const elem = document.createElement("LocationMarker")
           // elem.setAttribute("lat", el.geometry[0].coordinates[1])
           // elem.setAttribute("lng", el.geometry[0].coordinates[1])
@@ -90,11 +122,16 @@ export default {
       console.log("markers: ", markers)
       this.markers = markers
       console.log("markers: ", markers)
-    }
+    },
+    // setCategory (event) {
+
+    // }
+
   },
   mounted () {
     this.setCoordinates(this.events)
-  }
+  },
+
   // computed: {
   //   markers () {
   //     return <LocationMarker lat={0} lng={0} />

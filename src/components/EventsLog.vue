@@ -53,6 +53,7 @@ export default {
         {text: 'Category', value: 'categories'},
         {text: 'Event Name', value: 'title'},
         {text: 'Event Date/Time', value: 'dateTimes'},
+        {text: 'Event Coordinates', value: 'geo'},
         {text: 'Link', value: 'link'},
         {text: 'Sources', value: 'sources'},
       ]

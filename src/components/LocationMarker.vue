@@ -14,19 +14,33 @@ import { LMarker, LIcon } from 'vue2-leaflet';
 
 export default {
   name: 'LocationMarker',
+  // data () {
+  //   return {
+  //     markerCoordinates: [],
+  //   }
+  // },
   props: {
-    lat: Number, 
-    lng: Number,
+    latlng: [], 
+    // lat: Number,
+    // lng: Number,
   },
   components: {
     Icon,
     LMarker,
     LIcon,
   },
+  // methods: {
+  //   setMarkerCoordinates (latlng) {
+  //     this.markerCoordinates = latlng
+  //   }
+  // },
   computed: {
       markerCoordinates () {
-        return [this.lat, this.lng]
+        return this.latlng
       }
-  }
+  },
+  // mounted () {
+  //   this.setMarkerCoordinates(this.latlng)
+  // }
 }
 </script>
