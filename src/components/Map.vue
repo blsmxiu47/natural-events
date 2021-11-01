@@ -99,6 +99,10 @@ export default {
           //     return <LocationMarker latlng={[el.geometry[0].coordinates[1], el.geometry[0].coordinates[1]]} />
           //   }
           // })
+          console.log(el.id)
+          console.log(el.categories[0].id)
+          console.log(el.title)
+          console.log(el.geometry[0].date)
           let instance = Vue.component('iconrender', {
             data () {
               return {
@@ -106,7 +110,9 @@ export default {
               }
             },
             render () {
-              return <LocationMarker latlng={[el.geometry[0].coordinates[1], el.geometry[0].coordinates[0]]} />
+              let latlng = [el.geometry[0].coordinates[1], el.geometry[0].coordinates[0]]
+              let context = [el.id, el.categories[0].id, el.title, el.geometry[0].date]
+              return <LocationMarker latlng={latlng} context={context} />
             }
           })
           console.log(instance)
