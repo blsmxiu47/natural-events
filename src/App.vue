@@ -2,24 +2,29 @@
   <div>
     <Map v-if="!loading" :events="events" />
     <EventsLog v-if="!loading" :events="events" />
+    <DatePicker v-if="!loading" />
   </div>
 </template>
 
 <script>
 import Map from './components/Map.vue';
-import EventsLog from './components/EventsLog.vue'
+import EventsLog from './components/EventsLog.vue';
+import DatePicker from './components/DatePicker.vue';
 
 export default {
   name: 'App',
   components: {
     Map,
     EventsLog,
+    DatePicker,
   },
   data () {
     return {
-      api_key: '8fTlbUxCWEcNdhk0unRQMzhScNM30ZkomLxiDJ57',
+      api_key: process.env.NASA_API_KEY,
       url_base: 'https://eonet.sci.gsfc.nasa.gov/api/v3/',
+      status: 'open',
       category: 'wildfires',
+      days: 20,
       events: [],
       loading: true,
     }
@@ -31,7 +36,7 @@ export default {
         // this.eventData = await fetch("https://eonet.sci.gsfc.nasa.gov/api/v3/events?limit=5&days=20&category=wildfires")
         //   .then(response => response.json())
         //   .then(data => data.events);
-        let res = await fetch(`${this.url_base}events?status=open&category=${this.category}&api_key=${this.api_key}`);
+        let res = await fetch(`${this.url_base}events?status=${this.status}&category=${this.category}&days=${this.days}&api_key=${this.api_key}`);
         console.log(res)
         const events = await res.json();
         // for (let i = 0; i < events.length; i++) {
