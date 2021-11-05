@@ -31,6 +31,7 @@
 
 <script>
   export default {
+    name: 'DatePicker',
     data () {
       return {
           dates: [this.getStartDate(20), this.getToday()],

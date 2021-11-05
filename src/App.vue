@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Menu />
     <Map v-if="!loading" :events="events" />
     <EventsLog v-if="!loading" :events="events" />
     <DatePicker v-if="!loading" />
@@ -7,6 +8,7 @@
 </template>
 
 <script>
+import Menu from './components/Menu.vue'
 import Map from './components/Map.vue';
 import EventsLog from './components/EventsLog.vue';
 import DatePicker from './components/DatePicker.vue';
@@ -14,6 +16,7 @@ import DatePicker from './components/DatePicker.vue';
 export default {
   name: 'App',
   components: {
+    Menu,
     Map,
     EventsLog,
     DatePicker,
