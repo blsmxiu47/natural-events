@@ -2,10 +2,8 @@
   <!-- <range-date-picker v-model="dates" language="en" /> -->
   <v-row>
     <v-col
-      cols="12"
-      sm="6"
-      lg="3"
-    >
+    cols="12"
+    lg="6">
       <v-date-picker
         v-model="dates"
         range
@@ -15,9 +13,8 @@
       ></v-date-picker>
     </v-col>
     <v-col
-      cols="12"
-      sm="6"
-    >
+    cols="12"
+    lg="6">
       <v-text-field
         v-model="dateRangeText"
         label="Date range"
@@ -55,6 +52,9 @@
         return `${start.getFullYear()}-${start.getMonth()+1}-${start.getDate()}`;
       },
     },
+    updated () {
+      console.log("DatePicker updated...");
+    }
   }
 </script>
 
