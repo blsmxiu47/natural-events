@@ -23,25 +23,7 @@
         <v-divider></v-divider>
 
         <v-list>
-          <v-list-item>
-            <v-list-item-action>
-              <v-switch
-                v-model="wildfires"
-                color="green"
-              ></v-switch>
-            </v-list-item-action>
-            <v-list-item-title>Wildfires</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-action>
-              <v-switch
-                v-model="hurricanes"
-                color="green"
-              ></v-switch>
-            </v-list-item-action>
-            <v-list-item-title>Hurricanes</v-list-item-title>
-          </v-list-item>
+          <CategoryListItem v-for="category in categories" :key="category" :category="category" />
         </v-list>
 
         <!-- <v-card-actions>
@@ -77,9 +59,21 @@ export default {
   data () {
       return {
           menu: false,
-          wildfires: false,
-          hurricanes: false
+          categories: 
+          ['drought', 
+          'dustHaze', 
+          'earthquakes', 
+          'floods', 
+          'landslides', 
+          'manmade', 
+          'seaLakeIce', 
+          'severeStorms', 
+          'snow', 
+          'tempExtremes', 
+          'volcanoes', 
+          'waterColor', 
+          'wildfires'],
       }
-  }
+  },
 }
 </script>
