@@ -26,8 +26,8 @@ export default {
       api_key: process.env.NASA_API_KEY,
       url_base: 'https://eonet.sci.gsfc.nasa.gov/api/v3/',
       status: 'open',
-      categories: ['wildfires'],
-      days: 20,
+      categories: ['seaLakeIce', 'wildfires'],
+      days: null,
       start: '2021-10-01',
       end: '2021-10-31',
       events: [],
@@ -37,7 +37,7 @@ export default {
   methods: {
     async getData() {
       this.categories = this.categories.join(',');
-      console.log(this.categories);
+      console.log("categories: ", this.categories);
       try {
         console.log('getData try...');
         // this.eventData = await fetch("https://eonet.sci.gsfc.nasa.gov/api/v3/events?limit=5&days=20&category=wildfires")
