@@ -92,13 +92,6 @@ export default {
       const markers = events.map(el => {
         // console.log(el.categories)
         if (el.categories[0].id === "wildfires") {
-          // return [el.geometry[0].coordinates[1], el.geometry[0].coordinates[0]]
-          // let instance = new ComponentClass({
-          //   propsData: { latlng: [el.geometry[0].coordinates[1], el.geometry[0].coordinates[0]] },
-          //   render () {
-          //     return <LocationMarker latlng={[el.geometry[0].coordinates[1], el.geometry[0].coordinates[1]]} />
-          //   }
-          // })
           console.log(el.id)
           console.log(el.categories[0].id)
           console.log(el.title)
@@ -112,17 +105,28 @@ export default {
             render () {
               let latlng = [el.geometry[0].coordinates[1], el.geometry[0].coordinates[0]]
               let context = [el.id, el.categories[0].id, el.title, el.geometry[0].date]
-              return <LocationMarker latlng={latlng} context={context} />
+              return <LocationMarker category={el.categories[0].id} latlng={latlng} context={context} />
             }
           })
           console.log(instance)
           return instance
-          // return <LocationMarker lat={el.geometry[0].coordinates[1]} lng={el.geometry[0].coordinates[1]} /> // this isn't allowed in Vue :/, returns undefined
-          // const elem = document.createElement("LocationMarker")
-          // elem.setAttribute("lat", el.geometry[0].coordinates[1])
-          // elem.setAttribute("lng", el.geometry[0].coordinates[1])
-          // return elem
-          // return 1
+        } else if (el.categories[0].id === "seaLakeIce") {
+          for (let i = 0; i < el.geometry.length(); i++) {
+            let instance = Vue.component('iconrender', {
+              // data () {
+              //   return {
+              //     latlng: [el.geometry[i].coordinates[1], el.geometry[i].coordinates[0]]
+              //   }
+              // },
+              render () {
+                let latlng = [el.geometry[i].coordinates[1], el.geometry[i].coordinates[0]]
+                let context = [el.id, el.categories[0].id, el.title, el.geometry[i].date]
+                return <LocationMarker category={el.categories[0].id} latlng={latlng} context={context} />
+              }
+            })
+            console.log(instance)
+            return instance
+          }
         }
       })
       console.log("markers: ", markers)

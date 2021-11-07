@@ -1,25 +1,32 @@
 .location-icon {
   position: relative;
   font-size: 1.3rem;
+}
+
+/* .ice-icon {
+  color: 
+} */
+
+.wildfire-icon {
   color: red;
 }
 
-.location-icon:hover {
-    color: #000;
+.wildfire-icon:hover {
+  color: #000;
 }
 
 .menu-icon {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .menu {
-    position: fixed;
-    top: 24px;
-    left: 0;
-    z-index: 1000;
+  position: fixed;
+  top: 24px;
+  left: 0;
+  z-index: 1000;
 }
 
 .center-all {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
