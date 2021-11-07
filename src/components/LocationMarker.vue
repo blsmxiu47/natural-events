@@ -1,14 +1,16 @@
 <template>
   <l-marker :lat-lng="markerCoordinates">
       <l-icon>
-        <Icon v-if="category === 'wildfires'" icon="el:fire" class="location-icon wildfire-icon" />
-        <Icon v-if="category === 'seaLakeIce'" icon="flat-ui:mountain" class="location-icon" />
+        <Icon v-if="context[1] === 'wildfires'" icon="el:fire" class="location-icon wildfire-icon" />
+        <Icon v-else-if="context[1] === 'seaLakeIce'" icon="flat-ui:mountain" class="location-icon" />
+        <Icon v-else icon="bi:exclamation-circle" class="location-icon" />
       </l-icon>
       <l-tooltip class="tooltip" :options="{}" >
         <!-- <Tooltip :context="context" /> -->
           <h2>Event Details</h2>
           <ul>
             <li><strong>Event ID:</strong><br> {{ context[0] }}</li>
+            <li><strong>Event Category:</strong><br> {{ context[1] }}</li>
             <li><strong>Event Title:</strong><br> {{ context[2] }}</li>
             <li><strong>Event Registered Date:</strong><br> {{ context[3] }}</li>
           </ul>
@@ -34,9 +36,8 @@ export default {
   //   }
   // },
   props: {
-    category: String,
-    latlng: Array, 
-    context: Array,
+    latlng: [], 
+    context: [],
     // lat: Number,
     // lng: Number,
   },
@@ -75,6 +76,8 @@ export default {
 }
 
 .tooltip ul {
+  list-style: none;
+  text-align: left;
   padding: 5px 0;
 }
 

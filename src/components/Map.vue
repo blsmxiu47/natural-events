@@ -59,10 +59,10 @@ export default {
   methods: {
     setCoordinates (events) {
       console.log("setCoordinates...")
-      console.log("events type: ", typeof events)
-      console.log("events: ", events)
-      console.log("events length: ", events.length)
-      console.log("events 0: ", events[0])
+      // console.log("events type: ", typeof events)
+      // console.log("events: ", events)
+      // console.log("events length: ", events.length)
+      // console.log("events 0: ", events[0])
       // const markers = []
       // for (let i = 0; i < events.length; i++) {
       //   console.log("i", events[i])
@@ -84,18 +84,20 @@ export default {
       // console.log("miih", myiconhtml)
       // return string.replace('icon', myiconhtml)
 
-      const ComponentClass = Vue.extend(LocationMarker)
-      console.log(ComponentClass)
+      // const ComponentClass = Vue.extend(LocationMarker)
+      // console.log(ComponentClass)
       // instance.$mount() // pass nothing
       // this.$refs.container.appendChild(instance.$el)
 
       const markers = events.map(el => {
+        
         // console.log(el.categories)
+        // console.log(el.categories[0].id)
         if (el.categories[0].id === "wildfires") {
-          console.log(el.id)
-          console.log(el.categories[0].id)
-          console.log(el.title)
-          console.log(el.geometry[0].date)
+          // console.log(el.id)
+          // console.log(el.categories[0].id)
+          // console.log(el.title)
+          // console.log(el.geometry[0].date)
           let instance = Vue.component('iconrender', {
             data () {
               return {
@@ -104,11 +106,12 @@ export default {
             },
             render () {
               let latlng = [el.geometry[0].coordinates[1], el.geometry[0].coordinates[0]]
-              let context = [el.id, el.categories[0].id, el.title, el.geometry[0].date]
-              return <LocationMarker category={el.categories[0].id} latlng={latlng} context={context} />
+              // console.log(el.categories[0].id)
+              let context = [el.id, "wildfires", el.title, el.geometry[0].date]
+              return <LocationMarker latlng={latlng} context={context} />
             }
           })
-          console.log(instance)
+          // console.log(instance)
           return instance
         } else if (el.categories[0].id === "seaLakeIce") {
           for (let i = 0; i < el.geometry.length(); i++) {
@@ -120,18 +123,17 @@ export default {
               // },
               render () {
                 let latlng = [el.geometry[i].coordinates[1], el.geometry[i].coordinates[0]]
-                let context = [el.id, el.categories[0].id, el.title, el.geometry[i].date]
-                return <LocationMarker category={el.categories[0].id} latlng={latlng} context={context} />
+                let context = [el.id, "seaLakeIce", el.title, el.geometry[i].date]
+                return <LocationMarker latlng={latlng} context={context} />
               }
             })
-            console.log(instance)
+            // console.log(instance)
             return instance
           }
         }
       })
       console.log("markers: ", markers)
       this.markers = markers
-      console.log("markers: ", markers)
     },
     // setCategory (event) {
 
@@ -140,7 +142,7 @@ export default {
   },
   mounted () {
     this.setCoordinates(this.events)
-  },
+  }, 
 
   // computed: {
   //   markers () {
