@@ -1,10 +1,10 @@
 <template>
-  <l-marker :lat-lng="markerCoordinates">
+  <l-marker :lat-lng="context[3]">
       <l-icon>
         <Icon v-if="context[1] === 'wildfires'" icon="el:fire" class="location-icon wildfire-icon" />
-        <Icon v-else-if="context[1] === 'seaLakeIce'" icon="flat-ui:mountain" class="location-icon" />
-        <Icon v-else-if="context[1] === 'severeStorms'" icon="mi:storm" class="location-icon storm-icon" />
-        <Icon v-else icon="bi:exclamation-circle" class="location-icon" />
+        <Icon v-else-if="context[1] === 'seaLakeIce'" icon="flat-ui:mountain" class="location-icon" :style="iconOpacity" />
+        <Icon v-else-if="context[1] === 'severeStorms'" icon="mi:storm" class="location-icon storm-icon" :style="iconOpacity" />
+        <Icon v-else icon="bi:exclamation-circle" class="location-icon" :style="iconOpacity" />
       </l-icon>
       <l-tooltip class="tooltip" :options="{}" >
         <!-- <Tooltip :context="context" /> -->
@@ -13,7 +13,10 @@
             <li><strong>Event ID:</strong><br> {{ context[0] }}</li>
             <li><strong>Event Category:</strong><br> {{ context[1] }}</li>
             <li><strong>Event Title:</strong><br> {{ context[2] }}</li>
-            <li><strong>Event Registered Date:</strong><br> {{ context[3] }}</li>
+            <li><strong>Event Coordinates:</strong><br> {{ context[3] }}</li>
+            <li><strong>Event Registered Date:</strong><br> {{ context[4] }}</li>
+            <li v-if="context[1] != 'wildfires'"><strong>Event Magnitude:</strong><br> {{ context[6] }} {{ context[5] }} </li>
+            <li v-if="context[1] != 'wildfires'"><strong>opacity:</strong><br> {{ context[7] }} </li>
           </ul>
       </l-tooltip>
   </l-marker>
@@ -37,10 +40,7 @@ export default {
   //   }
   // },
   props: {
-    latlng: [], 
     context: [],
-    // lat: Number,
-    // lng: Number,
   },
   components: {
     Icon,
@@ -49,16 +49,23 @@ export default {
     LTooltip,
     // Tooltip
   },
+  computed: {
+    iconOpacity () {
+      return {
+        '--icon-opacity': this.context[7],
+      }
+    }
+  }
   // methods: {
   //   setMarkerCoordinates (latlng) {
   //     this.markerCoordinates = latlng
   //   }
   // },
-  computed: {
-      markerCoordinates () {
-        return this.latlng
-      }
-  },
+  // computed: {
+  //     markerCoordinates () {
+  //       return this.latlng
+  //     }
+  // },
   // mounted () {
   //   this.setMarkerCoordinates(this.latlng)
   // }
@@ -66,6 +73,10 @@ export default {
 </script>
 
 <style scoped>
+.location-icon {
+  opacity: var(--icon-opacity);
+}
+
 .tooltip { 
   position: relative;
   display: inline-block;

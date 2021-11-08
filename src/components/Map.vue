@@ -27,7 +27,6 @@ export default {
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       zoom: 3,
       center: [0, 0],
-      latlng: [0, 0],
       markers: [],
     }
   },
@@ -44,42 +43,43 @@ export default {
   },
   methods: {
     setCoordinates (events) {
-      console.log("setCoordinates...")
-      const markers = events.map(el => {
-        if (el.categories[0].id === "wildfires") {
+      console.log("setCoordinates...");
+      // how not to do this I hope(?) dbl for-loop ver...
+      let markers = [];
+      for (const ev of events) {
+        let numGeos = ev.geometry.length;
+        for (const geo of ev.geometry) {
+          const geoData = [
+            ev.id, 
+            ev.categories[0].id, 
+            ev.title,
+            geo.coordinates.reverse(), 
+            geo.date, 
+            geo.magnitudeUnit, 
+            geo.magnitudeValue, 
+            (ev.geometry.indexOf(geo)+1) / numGeos,
+            ];
           let instance = Vue.component('iconrender', {
             render () {
-              let latlng = [el.geometry[0].coordinates[1], el.geometry[0].coordinates[0]]
-              let context = [el.id, "wildfires", el.title, el.geometry[0].date]
-              return <LocationMarker latlng={latlng} context={context} />
+              return <LocationMarker context={geoData} />
             }
           })
-          return instance
-        } else if (el.categories[0].id === "seaLakeIce") {
-          for (let i = 0; i < el.geometry.length; i++) {
-            let instance = Vue.component('iconrender', {
-              render () {
-                let latlng = [el.geometry[i].coordinates[1], el.geometry[i].coordinates[0]]
-                let context = [el.id, "seaLakeIce", el.title, el.geometry[i].date]
-                return <LocationMarker latlng={latlng} context={context} />
-              }
-            })
-            return instance
-          }
-        } else if (el.categories[0].id === "severeStorms") {
-          for (let i = 0; i < el.geometry.length; i++) {
-            let instance = Vue.component('iconrender', {
-              render () {
-                let latlng = [el.geometry[i].coordinates[1], el.geometry[i].coordinates[0]]
-                let context = [el.id, "severeStorms", el.title, el.geometry[i].date]
-                return <LocationMarker latlng={latlng} context={context} />
-              }
-            })
-            return instance
-          }
+          markers.push(instance);
         }
-      })
-      console.log("markers: ", markers)
+      }
+      // console.log(geometries.slice(0,10))
+      // const markers = events.map(el => {
+      //     for (let i = 0; i < el.geometry.length; i++) {
+      //       let instance = Vue.component('iconrender', {
+      //         render () {
+      //           let latlng = [el.geometry[i].coordinates[1], el.geometry[i].coordinates[0]]
+      //           let context = [el.id, "seaLakeIce", el.title, el.geometry[i].date]
+      //           return <LocationMarker latlng={latlng} context={context} />
+      //         }
+      //       })
+      //       return instance
+      //     }
+      //   }
       this.markers = markers
     },
   },
