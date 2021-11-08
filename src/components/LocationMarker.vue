@@ -7,7 +7,6 @@
         <Icon v-else icon="bi:exclamation-circle" class="location-icon" :style="iconOpacity" />
       </l-icon>
       <l-tooltip class="tooltip" :options="{}" >
-        <!-- <Tooltip :context="context" /> -->
           <h2>Event Details</h2>
           <ul>
             <li><strong>Event ID:</strong><br> {{ context[0] }}</li>
@@ -25,20 +24,9 @@
 <script>
 import { Icon } from '@iconify/vue2';
 import { LMarker, LIcon, LTooltip } from 'vue2-leaflet';
-// import Tooltip from './Tooltip.vue';
 
 export default {
   name: 'LocationMarker',
-  // data () {
-  //   return {
-  //     hover: false,
-  //   }
-  // },
-  // data () {
-  //   return {
-  //     markerCoordinates: [],
-  //   }
-  // },
   props: {
     context: [],
   },
@@ -47,7 +35,6 @@ export default {
     LMarker,
     LIcon,
     LTooltip,
-    // Tooltip
   },
   computed: {
     iconOpacity () {
@@ -56,19 +43,6 @@ export default {
       }
     }
   }
-  // methods: {
-  //   setMarkerCoordinates (latlng) {
-  //     this.markerCoordinates = latlng
-  //   }
-  // },
-  // computed: {
-  //     markerCoordinates () {
-  //       return this.latlng
-  //     }
-  // },
-  // mounted () {
-  //   this.setMarkerCoordinates(this.latlng)
-  // }
 }
 </script>
 

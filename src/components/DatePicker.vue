@@ -1,5 +1,4 @@
 <template>
-  <!-- <range-date-picker v-model="dates" language="en" /> -->
   <v-row>
     <v-col
     cols="12"

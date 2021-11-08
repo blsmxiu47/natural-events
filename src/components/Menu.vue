@@ -7,7 +7,6 @@
       offset-x
       right
     >
-      <!-- <Icon icon="gg:menu" class="menu-icon"> -->
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="indigo"
@@ -18,7 +17,6 @@
           Filter Events
         </v-btn>
       </template>
-
       <v-card>
         <h1>Parameters</h1>
         <v-divider></v-divider>
@@ -33,7 +31,6 @@
                 <CategoryListItem v-for="category in categories" :key="category" :category="category" />
             </v-list>
             </v-col>
-            
             <v-col
             cols="6"
             sm="6">
