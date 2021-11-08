@@ -3,6 +3,7 @@
       <l-icon>
         <Icon v-if="context[1] === 'wildfires'" icon="el:fire" class="location-icon wildfire-icon" />
         <Icon v-else-if="context[1] === 'seaLakeIce'" icon="flat-ui:mountain" class="location-icon" />
+        <Icon v-else-if="context[1] === 'severeStorms'" icon="mi:storm" class="location-icon storm-icon" />
         <Icon v-else icon="bi:exclamation-circle" class="location-icon" />
       </l-icon>
       <l-tooltip class="tooltip" :options="{}" >

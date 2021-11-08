@@ -66,6 +66,17 @@ export default {
             })
             return instance
           }
+        } else if (el.categories[0].id === "severeStorms") {
+          for (let i = 0; i < el.geometry.length; i++) {
+            let instance = Vue.component('iconrender', {
+              render () {
+                let latlng = [el.geometry[i].coordinates[1], el.geometry[i].coordinates[0]]
+                let context = [el.id, "severeStorms", el.title, el.geometry[i].date]
+                return <LocationMarker latlng={latlng} context={context} />
+              }
+            })
+            return instance
+          }
         }
       })
       console.log("markers: ", markers)

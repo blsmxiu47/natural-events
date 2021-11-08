@@ -26,7 +26,7 @@ export default {
       api_key: process.env.NASA_API_KEY,
       url_base: 'https://eonet.sci.gsfc.nasa.gov/api/v3/',
       status: 'open',
-      categories: ['seaLakeIce', 'wildfires'],
+      categories: ['seaLakeIce', 'wildfires','severeStorms'],
       days: null,
       start: '2021-10-01',
       end: '2021-10-31',
