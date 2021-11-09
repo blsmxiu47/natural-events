@@ -25,21 +25,28 @@ export default {
       status: 'open',
       categories: ['seaLakeIce', 'wildfires','severeStorms'],
       days: null,
-      start: '2021-10-01',
-      end: '2021-10-31',
+      start: null,
+      end: null,
       events: [],
       loading: true,
     }
   },
   methods: {
     async getData() {
-      this.categories = this.categories.join(',');
+      if (Array.isArray(this.categories)) {
+        this.categories = this.categories.join(',');
+      }
       try {
         console.log('getData try...');
         // this.eventData = await fetch("https://eonet.sci.gsfc.nasa.gov/api/v3/events?limit=5&days=20&category=wildfires")
         //   .then(response => response.json())
         //   .then(data => data.events);
-        let res = await fetch(`${this.url_base}events?status=${this.status}&category=${this.categories}&days=${this.days}&api_key=${this.api_key}`);
+        // let res = await fetch(`${this.url_base}events?status=${this.status}&category=${this.categories}&days=${this.days}&api_key=${this.api_key}`);
+        if (this.start == null) {
+          this.end = this.getToday();
+          this.start = this.getStartDate(28);
+        }
+        let res = await fetch(`${this.url_base}events?status=${this.status}&category=${this.categories}&days=${this.days}&start=${this.start}&end=${this.end}&api_key=${this.api_key}`);
         console.log("response:", res);
         const events = await res.json();
 
@@ -51,7 +58,19 @@ export default {
       }
     },
     setResults (result) {
-      this.events = result
+      this.events = result;
+    },
+    getToday () {
+      let today = new Date().toISOString().slice(0, 10)
+      // const current = new Date();
+      // const today = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
+      return today;
+    },
+    getStartDate (daysPrior) {
+      let start = new Date();
+      start.setDate(start.getDate() - daysPrior);
+      return start.toISOString().slice(0, 10);
+      // return `${start.getFullYear()}-${start.getMonth()+1}-${start.getDate()}`;
     },
   },
   created () {

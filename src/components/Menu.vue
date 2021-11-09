@@ -49,7 +49,7 @@
                 <v-btn
                 color="primary"
                 text
-                @click="menu = false; updateData"
+                @click="updateData"
                 >
                 Update
                 </v-btn>
@@ -93,7 +93,9 @@ export default {
   },
   methods: {
       updateData () {
-        this.$root.$emit('updateData')
+        console.log('updating data...');
+        this.$root.$emit('updateData');
+        this.menu = false;
       }
   }
 }

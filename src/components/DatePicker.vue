@@ -30,8 +30,8 @@
     name: 'DatePicker',
     data () {
       return {
-          dates: [this.getStartDate(20), this.getToday()],
-          days: 20,
+          dates: [this.getStartDate(28), this.getToday()],
+          days: 28,
         }
     },
     computed: {
