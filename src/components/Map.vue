@@ -84,7 +84,12 @@ export default {
     },
   },
   mounted () {
-    this.setCoordinates(this.events)
+    console.log('mounted... setCoordinates...');
+    this.setCoordinates(this.events);
   }, 
+  // updated () {
+  //   console.log('updated... setCoordinates...');
+  //   this.setCoordinates(this.events);
+  // }
 }
 </script>

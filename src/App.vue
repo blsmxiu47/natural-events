@@ -29,7 +29,6 @@ export default {
       loading: true,
     }
   },
-  inject: ['dates'],
   methods: {
     async getData(start, end) {
       if (Array.isArray(this.categories)) {

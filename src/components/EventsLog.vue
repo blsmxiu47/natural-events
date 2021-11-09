@@ -30,11 +30,8 @@ export default {
         if (events[i].sources.constructor === Array) {
           events[i].sources = events[i].sources.map(el => el.id).join();
         }
-
         events[i].dateTimes = events[i].geometry.map(el => el.date).join(' | ')
-
         events[i].geo = events[i].geometry.map(el => '[' + [el.coordinates[1], el.coordinates[0]].join() + ']').join(' | ');
-
       }
     }
   },
@@ -51,8 +48,13 @@ export default {
       ]
     }
   },
-    mounted () {
-    this.setEvents(this.events)
+  mounted () {
+    console.log('mounted... setEvents...');
+    this.setEvents(this.events);
+  },
+  updated () {
+    console.log('updated... setEvents...');
+    this.setEvents(this.events);
   }
 }
 </script>
