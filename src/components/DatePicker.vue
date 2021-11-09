@@ -34,18 +34,10 @@
           days: 28,
         }
     },
-    // provide () {
-    //   return {
-    //     dates: this.dateRange,
-    //   };
-    // },
     computed: {
       dateRangeText () {
         return this.dates.join(' ~ ')
       },
-      // dateRange () {
-      //   return this.dates;
-      // },
     },
     methods: {
       getToday () {
@@ -69,7 +61,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

@@ -103,11 +103,5 @@ export default {
       this.menu = false;
     },
   },
-  // mounted () {
-  //   App.$on('updateDateRange', (dates) => {
-  //     console.log('Menu $on updateDateRange...')
-  //     this.dates = dates;
-  //   })
-  // }
 }
 </script>

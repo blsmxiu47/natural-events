@@ -25,8 +25,6 @@ export default {
       status: 'open',
       categories: ['seaLakeIce', 'wildfires','severeStorms'],
       days: null,
-      // start: null,
-      // end: null,
       events: [],
       loading: true,
     }
@@ -42,11 +40,6 @@ export default {
         // this.eventData = await fetch("https://eonet.sci.gsfc.nasa.gov/api/v3/events?limit=5&days=20&category=wildfires")
         //   .then(response => response.json())
         //   .then(data => data.events);
-        // let res = await fetch(`${this.url_base}events?status=${this.status}&category=${this.categories}&days=${this.days}&api_key=${this.api_key}`);
-        if (start == null) {
-          end = this.getToday();
-          start = this.getStartDate(28);
-        }
         let res = await fetch(`${this.url_base}events?status=${this.status}&category=${this.categories}&days=${this.days}&start=${start}&end=${end}&api_key=${this.api_key}`);
         console.log("response:", res);
         const events = await res.json();
@@ -81,12 +74,6 @@ export default {
   created () {
     this.getData(this.getStartDate(28), this.getToday());
   },
-  // mounted () {
-  //   this.$root.$on('updateData', () => {
-  //     console.log('App $on updateData...', this.dates)
-  //     this.getData(this.dates[0], this.dates[1]);
-  //   })
-  // }
 }
 </script>
 
