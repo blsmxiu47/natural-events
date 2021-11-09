@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Menu />
+    <Menu @update-data="updateData" />
     <Map v-if="!loading" :events="events" />
     <EventsLog v-if="!loading" :events="events" />
   </v-app>
@@ -25,14 +25,15 @@ export default {
       status: 'open',
       categories: ['seaLakeIce', 'wildfires','severeStorms'],
       days: null,
-      start: null,
-      end: null,
+      // start: null,
+      // end: null,
       events: [],
       loading: true,
     }
   },
+  inject: ['dates'],
   methods: {
-    async getData() {
+    async getData(start, end) {
       if (Array.isArray(this.categories)) {
         this.categories = this.categories.join(',');
       }
@@ -42,11 +43,11 @@ export default {
         //   .then(response => response.json())
         //   .then(data => data.events);
         // let res = await fetch(`${this.url_base}events?status=${this.status}&category=${this.categories}&days=${this.days}&api_key=${this.api_key}`);
-        if (this.start == null) {
-          this.end = this.getToday();
-          this.start = this.getStartDate(28);
+        if (start == null) {
+          end = this.getToday();
+          start = this.getStartDate(28);
         }
-        let res = await fetch(`${this.url_base}events?status=${this.status}&category=${this.categories}&days=${this.days}&start=${this.start}&end=${this.end}&api_key=${this.api_key}`);
+        let res = await fetch(`${this.url_base}events?status=${this.status}&category=${this.categories}&days=${this.days}&start=${start}&end=${end}&api_key=${this.api_key}`);
         console.log("response:", res);
         const events = await res.json();
 
@@ -72,15 +73,20 @@ export default {
       return start.toISOString().slice(0, 10);
       // return `${start.getFullYear()}-${start.getMonth()+1}-${start.getDate()}`;
     },
+    updateData (dates) {
+      console.log('App updateData...', dates);
+      this.getData(dates[0], dates[1]);
+    },
   },
   created () {
-    this.getData();
+    this.getData(this.getStartDate(28), this.getToday());
   },
-  mounted () {
-    this.$root.$on('updateData', () => {
-      this.getData();
-    })
-  }
+  // mounted () {
+  //   this.$root.$on('updateData', () => {
+  //     console.log('App $on updateData...', this.dates)
+  //     this.getData(this.dates[0], this.dates[1]);
+  //   })
+  // }
 }
 </script>
 

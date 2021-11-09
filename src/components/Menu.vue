@@ -34,7 +34,7 @@
             <v-col
             cols="6"
             sm="6">
-            <DatePicker />
+            <DatePicker @update-date-range="updateDateRange" />
             </v-col>
         </v-row>
         <v-row>
@@ -89,14 +89,25 @@ export default {
           'volcanoes', 
           'waterColor', 
           'wildfires'],
+          dates: [],
       }
   },
   methods: {
-      updateData () {
-        console.log('updating data...');
-        this.$root.$emit('updateData');
-        this.menu = false;
-      }
-  }
+    updateDateRange (dates) {
+      console.log('Menu updateDateRange...')
+      this.dates = dates;
+    },
+    updateData () {
+      console.log('updating data...', this.dates);
+      this.$emit('update-data', this.dates);
+      this.menu = false;
+    },
+  },
+  // mounted () {
+  //   App.$on('updateDateRange', (dates) => {
+  //     console.log('Menu $on updateDateRange...')
+  //     this.dates = dates;
+  //   })
+  // }
 }
 </script>

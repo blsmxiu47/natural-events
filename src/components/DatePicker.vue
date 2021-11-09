@@ -34,10 +34,18 @@
           days: 28,
         }
     },
+    // provide () {
+    //   return {
+    //     dates: this.dateRange,
+    //   };
+    // },
     computed: {
       dateRangeText () {
         return this.dates.join(' ~ ')
       },
+      // dateRange () {
+      //   return this.dates;
+      // },
     },
     methods: {
       getToday () {
@@ -46,12 +54,17 @@
         return today;
       },
       getStartDate (days) {
-        var start = new Date();
+        let start = new Date();
         start.setDate(start.getDate() - days);
         return `${start.getFullYear()}-${start.getMonth()+1}-${start.getDate()}`;
       },
+      updateDateRange () {
+        this.$emit('update-date-range', this.dates);
+        console.log('emitting updateDateRange...', this.dates);
+      },
     },
     updated () {
+      this.updateDateRange();
       console.log("DatePicker updated...");
     }
   }
