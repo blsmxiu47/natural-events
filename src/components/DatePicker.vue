@@ -28,28 +28,39 @@
 <script>
   export default {
     name: 'DatePicker',
+    props: {
+      defaultDates: Array,
+    },
     data () {
       return {
-          dates: [this.getStartDate(28), this.getToday()],
-          days: 28,
+          dates: this.defaultDates,
+          // days: 28,
         }
     },
     computed: {
+    //   dates: {
+    //     get: function () {
+    //       return this.dates
+    //     },
+    //     set: function (dates) {
+    //       this.dates = dates
+    //     }
+    //   },
       dateRangeText () {
         return this.dates.join(' ~ ')
       },
     },
     methods: {
-      getToday () {
-        const current = new Date();
-        const today = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
-        return today;
-      },
-      getStartDate (days) {
-        let start = new Date();
-        start.setDate(start.getDate() - days);
-        return `${start.getFullYear()}-${start.getMonth()+1}-${start.getDate()}`;
-      },
+      // getToday () {
+      //   const current = new Date();
+      //   const today = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
+      //   return today;
+      // },
+      // getStartDate (days) {
+      //   let start = new Date();
+      //   start.setDate(start.getDate() - days);
+      //   return `${start.getFullYear()}-${start.getMonth()+1}-${start.getDate()}`;
+      // },
       updateDateRange () {
         this.$emit('update-date-range', this.dates);
         console.log('emitting updateDateRange...', this.dates);

@@ -31,7 +31,7 @@
           <v-col
           cols="6"
           sm="6">
-            <DatePicker @update-date-range="updateDateRange" />
+            <DatePicker @update-date-range="updateDateRange" :defaultDates="defaultDates" />
           </v-col>
         </v-row>
         <v-row>
@@ -65,6 +65,7 @@ export default {
   name: 'Menu',
   props: {
     categories: Object,
+    defaultDates: Array,
   },
   components: {
       DatePicker,
@@ -89,7 +90,7 @@ export default {
           // 'volcanoes', 
           // 'waterColor', 
           // 'wildfires'],
-          dates: [],
+          dates: this.defaultDates,
       }
   },
   methods: {
@@ -100,10 +101,11 @@ export default {
     updateCategory (category, show) {
       console.log('Menu updateCategory...');
       this.categories[category] = show;
+      console.log("new categories:", this.categories);
     },
     updateData () {
-      console.log('updating data...', this.dates);
-      this.$emit('update-data', this.dates);
+      console.log('updating data...', this.categories, this.dates);
+      this.$emit('update-data', this.categories, this.dates);
       this.menu = false;
     },
   },
