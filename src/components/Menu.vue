@@ -21,39 +21,35 @@
         <h1>Parameters</h1>
         <v-divider></v-divider>
         <v-row>
-            <v-col
-            cols="6"
-            sm="6">
+          <v-col
+          cols="6"
+          sm="6">
             <v-list>
-                <v-list-item>
-                    test item 1
-                </v-list-item>
-                <CategoryListItem v-for="category in categories" :key="category" :category="category" />
+              <CategoryListItem v-for="category in categories" :key="category" :category="category" />
             </v-list>
-            </v-col>
-            <v-col
-            cols="6"
-            sm="6">
+          </v-col>
+          <v-col
+          cols="6"
+          sm="6">
             <DatePicker @update-date-range="updateDateRange" />
-            </v-col>
+          </v-col>
         </v-row>
         <v-row>
-            <v-card-actions class="center-all">
-                <!-- <v-spacer></v-spacer> -->
-                <v-btn
-                text
-                @click="menu = false"
-                >
-                Cancel
-                </v-btn>
-                <v-btn
-                color="primary"
-                text
-                @click="updateData"
-                >
-                Update
-                </v-btn>
-            </v-card-actions>
+          <v-card-actions class="center-all">
+            <v-btn
+            text
+            @click="menu = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+            color="primary"
+            text
+            @click="updateData"
+            >
+              Update
+            </v-btn>
+          </v-card-actions>
         </v-row>
       </v-card>
     </v-menu>
@@ -75,20 +71,21 @@ export default {
       return {
           menu: false,
         //   updated: false,
-          categories: 
-          ['drought', 
-          'dustHaze', 
-          'earthquakes', 
-          'floods', 
-          'landslides', 
-          'manmade', 
-          'seaLakeIce', 
-          'severeStorms', 
-          'snow', 
-          'tempExtremes', 
-          'volcanoes', 
-          'waterColor', 
-          'wildfires'],
+          categories: ['seaLakeIce', 'wildfires', 'severeStorms', 'volcanoes'],
+          // categories: 
+          // ['drought', 
+          // 'dustHaze', 
+          // 'earthquakes', 
+          // 'floods', 
+          // 'landslides', 
+          // 'manmade', 
+          // 'seaLakeIce', 
+          // 'severeStorms', 
+          // 'snow', 
+          // 'tempExtremes', 
+          // 'volcanoes', 
+          // 'waterColor', 
+          // 'wildfires'],
           dates: [],
       }
   },
