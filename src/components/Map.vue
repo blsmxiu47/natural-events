@@ -14,13 +14,20 @@ import Vue from 'vue';
 
 export default {
   name: 'Map',
-  props: ['events', 'categories'],
+  props: ['events', 'categories', 'dates'],
   watch: {
+    // temporary; there's gotta be a better way to do this. Either lifecycle hook, Comp API, or just watching one prop representing menu updated
     events () {
-      this.setCoordinates(this.events, this.categories);
+      this.setCoordinates(this.events, this.categories, this.dates);
     },
-    categories () {
-      this.setCoordinates(this.events, this.categories);
+    categories: {
+      handler: function () {
+        this.setCoordinates(this.events, this.categories, this.dates);
+      },
+      deep: true,
+    },
+    dates () {
+      this.setCoordinates(this.events, this.categories, this.dates);
     }
   },
   components: {
@@ -38,31 +45,74 @@ export default {
       markers: [],
     }
   },
+  // computed: {
+  //   getEvents () {
+  //     return this.events;
+  //   },
+  //   getCategories () {
+  //     return this.categories;
+  //   },
+  //   getDates () {
+  //     return this.dates;
+  //   }
+  // },
   methods: {
-    setCoordinates (events, categories) {
+    setCoordinates (events, categories, dates) {
       console.log("setCoordinates...");
+      // console.log("categories: ", categories)
+      // console.log("dates: ", dates)
       // how not to do this I hope(?) dbl for-loop ver...
       let markers = [];
       for (const ev of events) {
-        if (categories[ev.categories[0].id]) {
-          let numGeos = ev.geometry.length;
-          for (const geo of ev.geometry) {
-            const geoData = [
-              ev.id, 
-              ev.categories[0].id, 
-              ev.title,
-              geo.coordinates.reverse(), 
-              geo.date, 
-              geo.magnitudeUnit, 
-              geo.magnitudeValue, 
-              (ev.geometry.indexOf(geo)+1) / numGeos,
-              ];
-            let instance = Vue.component('iconrender', {
-              render () {
-                return <LocationMarker context={geoData} />
+        if (ev.categories[0].id) {
+          if (categories[ev.categories[0].id]) {
+            let numGeos = ev.geometry.length;
+            for (const geo of ev.geometry) {
+              if (geo.date >= dates[0] && geo.date <= dates[1]) {
+                const geoData = [
+                  ev.id, 
+                  ev.categories[0].id, 
+                  ev.title,
+                  geo.coordinates.reverse(), 
+                  geo.date, 
+                  geo.magnitudeUnit, 
+                  geo.magnitudeValue, 
+                  (ev.geometry.indexOf(geo)+1) / numGeos,
+                  ];
+                let instance = Vue.component('iconrender', {
+                  render () {
+                    return <LocationMarker context={geoData} />
+                  }
+                })
+                markers.push(instance);
               }
-            })
-            markers.push(instance);
+            }
+          }
+        } else {
+          let evCat = ev.categories.replace(/\s+/g, "").replace(/(and)+/g, "");
+          evCat = evCat.charAt(0).toLowerCase() + evCat.slice(1);
+          if (categories[evCat]) {
+            let numGeos = ev.geometry.length;
+            for (const geo of ev.geometry) {
+              if (geo.date >= dates[0] && geo.date <= dates[1]) {
+                const geoData = [
+                  ev.id, 
+                  evCat, 
+                  ev.title,
+                  geo.coordinates, 
+                  geo.date, 
+                  geo.magnitudeUnit, 
+                  geo.magnitudeValue, 
+                  (ev.geometry.indexOf(geo)+1) / numGeos,
+                  ];
+                let instance = Vue.component('iconrender', {
+                  render () {
+                    return <LocationMarker context={geoData} />
+                  }
+                })
+                markers.push(instance);
+              }
+            }
           }
         }
       }
@@ -84,7 +134,7 @@ export default {
   },
   mounted () {
     console.log('mounted... setCoordinates...');
-    this.setCoordinates(this.events, this.categories);
+    this.setCoordinates(this.events, this.categories, this.dates);
   }, 
   // updated () {
   //   console.log('updated... setCoordinates...');
