@@ -20,7 +20,7 @@ export default {
   },
   data () {
     return {
-      api_key: process.env.NASA_API_KEY,
+      api_key: process.env.VUE_APP_NASA_API_KEY,
       url_base: 'https://eonet.sci.gsfc.nasa.gov/api/v3/',
       status: 'open',
       categories: ['seaLakeIce', 'wildfires','severeStorms'],
