@@ -4,7 +4,7 @@
         <Icon v-if="context[1] === 'wildfires'" icon="el:fire" class="location-icon wildfire-icon" />
         <Icon v-else-if="context[1] === 'seaLakeIce'" icon="flat-ui:mountain" class="location-icon" :style="iconOpacity" />
         <Icon v-else-if="context[1] === 'severeStorms'" icon="mi:storm" class="location-icon storm-icon" :style="iconOpacity" />
-        <Icon v-else-if="context[1] === 'snow'" icon="bi:cloud-snow" class="location-icon storm-icon" :style="iconOpacity" />
+        <Icon v-else-if="context[1] === 'snow'" icon="bi:cloud-snow" class="location-icon" :style="iconOpacity" />
         <Icon v-else-if="context[1] === 'volcanoes'" icon="maki:volcano" class="location-icon" :style="iconOpacity" />
         <Icon v-else icon="bi:exclamation-circle" class="location-icon" :style="iconOpacity" />
       </l-icon>
@@ -16,8 +16,8 @@
             <li><strong>Event Title:</strong><br> {{ context[2] }}</li>
             <li><strong>Event Coordinates:</strong><br> {{ context[3] }}</li>
             <li><strong>Event Registered Date:</strong><br> {{ context[4] }}</li>
-            <li v-if="context[1] != 'wildfires'"><strong>Event Magnitude:</strong><br> {{ context[6] }} {{ context[5] }} </li>
-            <li v-if="context[1] != 'wildfires'"><strong>opacity:</strong><br> {{ context[7] }} </li>
+            <li v-if="hasMagnitude(context[1])"><strong>Event Magnitude:</strong><br> {{ context[6] }} {{ context[5] }} </li>
+            <!-- <li v-if="context[1] != 'wildfires'"><strong>opacity:</strong><br> {{ context[7] }} </li> -->
           </ul>
       </l-tooltip>
   </l-marker>
@@ -43,6 +43,11 @@ export default {
       return {
         '--icon-opacity': this.context[7],
       }
+    }
+  },
+  methods: {
+    hasMagnitude (category) {
+      return ['seaLakeIce', 'severeStorms'].includes(category)
     }
   }
 }
