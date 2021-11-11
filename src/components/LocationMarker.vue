@@ -4,6 +4,8 @@
         <Icon v-if="context[1] === 'wildfires'" icon="el:fire" class="location-icon wildfire-icon" />
         <Icon v-else-if="context[1] === 'seaLakeIce'" icon="flat-ui:mountain" class="location-icon" :style="iconOpacity" />
         <Icon v-else-if="context[1] === 'severeStorms'" icon="mi:storm" class="location-icon storm-icon" :style="iconOpacity" />
+        <Icon v-else-if="context[1] === 'snow'" icon="bi:cloud-snow" class="location-icon storm-icon" :style="iconOpacity" />
+        <Icon v-else-if="context[1] === 'volcanoes'" icon="maki:volcano" class="location-icon" :style="iconOpacity" />
         <Icon v-else icon="bi:exclamation-circle" class="location-icon" :style="iconOpacity" />
       </l-icon>
       <l-tooltip class="tooltip" :options="{}" >
