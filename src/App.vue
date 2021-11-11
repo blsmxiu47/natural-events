@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <Menu @update-data="updateData" :categories="categories" />
-    <Map v-if="!loading" :events="events" :categories="categories"/>
+    <Menu @update-data="updateData" :categories="categories" :defaultDates="dates" />
+    <Map v-if="!loading" :events="events" :categories="categories" :dates="dates" />
     <EventsLog v-if="!loading" :events="events" />
   </v-app>
 </template>
@@ -24,6 +24,7 @@ export default {
       url_base: 'https://eonet.sci.gsfc.nasa.gov/api/v3/',
       status: 'open',
       categories: {'seaLakeIce': true, 'wildfires': true, 'severeStorms': true, 'volcanoes': true},
+      dates: ['2021-01-01', this.getToday()],
       days: null,
       events: [],
       loading: true,
@@ -66,13 +67,15 @@ export default {
       return start.toISOString().slice(0, 10);
       // return `${start.getFullYear()}-${start.getMonth()+1}-${start.getDate()}`;
     },
-    updateData (dates) {
-      console.log('App updateData...', dates);
-      this.getData(dates[0], dates[1]);
+    updateData (categories, dates) {
+      console.log('App updateData...', categories, dates);
+      this.categories = categories;
+      this.dates = dates;
+      // this.getData(dates[0], dates[1]);
     },
   },
   created () {
-    this.getData(this.getStartDate(28), this.getToday());
+    this.getData(this.dates[0], this.dates[1]);
   },
 }
 </script>
