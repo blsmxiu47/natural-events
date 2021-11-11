@@ -18,8 +18,18 @@ export default {
   },
   data () {
     return {
-      showCategory: false,
+      showCategory: true,
     }
+  },
+  methods: {
+    updateCategory () {
+      this.$emit('update-category', this.category, this.showCategory);
+      console.log('emitting updateCategory...', this.category, this.showCategory);
+    },
+  },
+  updated () {
+    this.updateCategory();
+    console.log("Category switch updated...");
   }
 }
 </script>

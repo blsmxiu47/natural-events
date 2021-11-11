@@ -25,7 +25,7 @@
           cols="6"
           sm="6">
             <v-list>
-              <CategoryListItem v-for="category in categories" :key="category" :category="category" />
+              <CategoryListItem @update-category="updateCategory" v-for="category in Object.keys(categories)" :key="category" :category="category" />
             </v-list>
           </v-col>
           <v-col
@@ -63,6 +63,9 @@ import CategoryListItem from './CategoryListItem.vue'
 
 export default {
   name: 'Menu',
+  props: {
+    categories: Object,
+  },
   components: {
       DatePicker,
       CategoryListItem,
@@ -71,7 +74,7 @@ export default {
       return {
           menu: false,
         //   updated: false,
-          categories: ['seaLakeIce', 'wildfires', 'severeStorms', 'volcanoes'],
+          // categories: {'seaLakeIce': true, 'wildfires': true, 'severeStorms': true, 'volcanoes': true},
           // categories: 
           // ['drought', 
           // 'dustHaze', 
@@ -91,8 +94,12 @@ export default {
   },
   methods: {
     updateDateRange (dates) {
-      console.log('Menu updateDateRange...')
+      console.log('Menu updateDateRange...');
       this.dates = dates;
+    },
+    updateCategory (category, show) {
+      console.log('Menu updateCategory...');
+      this.categories[category] = show;
     },
     updateData () {
       console.log('updating data...', this.dates);

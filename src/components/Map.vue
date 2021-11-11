@@ -14,7 +14,15 @@ import Vue from 'vue';
 
 export default {
   name: 'Map',
-  props: ['events'],
+  props: ['events', 'categories'],
+  watch: {
+    events () {
+      this.setCoordinates(this.events, this.categories);
+    },
+    categories () {
+      this.setCoordinates(this.events, this.categories);
+    }
+  },
   components: {
     LMap,
     LTileLayer,
@@ -30,41 +38,32 @@ export default {
       markers: [],
     }
   },
-  computed: {
-    MarkerComponent (category) {
-      if (category === "wildfires") {
-        return LocationMarker;
-      } else if (category === "hurricane") {
-        return LocationMarker;
-      } else {
-        return LocationMarker;
-      }
-    }
-  },
   methods: {
-    setCoordinates (events) {
+    setCoordinates (events, categories) {
       console.log("setCoordinates...");
       // how not to do this I hope(?) dbl for-loop ver...
       let markers = [];
       for (const ev of events) {
-        let numGeos = ev.geometry.length;
-        for (const geo of ev.geometry) {
-          const geoData = [
-            ev.id, 
-            ev.categories[0].id, 
-            ev.title,
-            geo.coordinates.reverse(), 
-            geo.date, 
-            geo.magnitudeUnit, 
-            geo.magnitudeValue, 
-            (ev.geometry.indexOf(geo)+1) / numGeos,
-            ];
-          let instance = Vue.component('iconrender', {
-            render () {
-              return <LocationMarker context={geoData} />
-            }
-          })
-          markers.push(instance);
+        if (categories[ev.categories[0].id]) {
+          let numGeos = ev.geometry.length;
+          for (const geo of ev.geometry) {
+            const geoData = [
+              ev.id, 
+              ev.categories[0].id, 
+              ev.title,
+              geo.coordinates.reverse(), 
+              geo.date, 
+              geo.magnitudeUnit, 
+              geo.magnitudeValue, 
+              (ev.geometry.indexOf(geo)+1) / numGeos,
+              ];
+            let instance = Vue.component('iconrender', {
+              render () {
+                return <LocationMarker context={geoData} />
+              }
+            })
+            markers.push(instance);
+          }
         }
       }
       // console.log(geometries.slice(0,10))
@@ -85,7 +84,7 @@ export default {
   },
   mounted () {
     console.log('mounted... setCoordinates...');
-    this.setCoordinates(this.events);
+    this.setCoordinates(this.events, this.categories);
   }, 
   // updated () {
   //   console.log('updated... setCoordinates...');
