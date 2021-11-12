@@ -135,6 +135,9 @@ export default {
   mounted () {
     console.log('mounted... setCoordinates...');
     this.setCoordinates(this.events, this.categories, this.dates);
+    // this.$root.$on('update-data', data => {
+    //   this.setCoordinates(this.events, data[0], data[1])
+    // })
   }, 
   // updated () {
   //   console.log('updated... setCoordinates...');

@@ -67,9 +67,9 @@ export default {
       return start.toISOString().slice(0, 10);
       // return `${start.getFullYear()}-${start.getMonth()+1}-${start.getDate()}`;
     },
-    updateData (categories, dates) {
-      console.log('App updateData...', categories, dates);
-      this.categories = categories;
+    updateData (dates) {
+      console.log('App updateData...', dates);
+      // this.categories = categories;
       this.dates = dates;
       // this.getData(dates[0], dates[1]);
     },

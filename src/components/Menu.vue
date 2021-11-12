@@ -104,8 +104,8 @@ export default {
       console.log("new categories:", this.categories);
     },
     updateData () {
-      console.log('updating data...', this.categories, this.dates);
-      this.$emit('update-data', this.categories, this.dates);
+      console.log('updating data...', this.dates);
+      this.$emit('update-data', this.dates);
       this.menu = false;
     },
   },
