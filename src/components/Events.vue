@@ -13,10 +13,10 @@ export default {
     methods: {
         async getData() {
             try {
-                // this.eventData = await fetch("https://eonet.sci.gsfc.nasa.gov/api/v3/events?limit=5&days=20&category=wildfires")
+                // this.eventData = await fetch("https://eonet.gsfc.nasa.gov/api/v3/events?limit=5&days=20&category=wildfires")
                 //   .then(response => response.json())
                 //   .then(data => data.events);
-                let res = await fetch("https://eonet.sci.gsfc.nasa.gov/api/v3/events?limit=5&days=20&category=wildfires");
+                let res = await fetch("https://eonet.gsfc.nasa.gov/api/v3/events?limit=5&days=20&category=wildfires");
                 this.eventData = await res.json();
                 this.eventData = this.eventData.events;
                 const events = this.eventData;

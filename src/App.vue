@@ -1,5 +1,12 @@
 <template>
   <v-app>
+    <header>
+      <a href="/">Natural Events</a>
+      <nav>
+        <li><a href="https://github.com/blsmxiu47/natural-events">GitHub</a></li>
+        <li><a href="https://eonet.gsfc.nasa.gov/">EONET</a></li>
+      </nav>
+    </header>
     <Menu @update-data="updateData" :categories="categories" :defaultDates="dates" />
     <Map v-if="!loading" :events="events" :categories="categories" :dates="dates" />
     <EventsLog v-if="!loading" :events="events" />
@@ -21,7 +28,7 @@ export default {
   data () {
     return {
       api_key: process.env.VUE_APP_NASA_API_KEY,
-      url_base: 'https://eonet.sci.gsfc.nasa.gov/api/v3/',
+      url_base: 'https://eonet.gsfc.nasa.gov/api/v3/',
       status: 'open',
       categories: {'seaLakeIce': true, 'wildfires': true, 'severeStorms': true, 'volcanoes': true},
       dates: ['2021-01-01', this.getToday()],
@@ -38,7 +45,7 @@ export default {
       const categoriesString = Object.keys(this.categories).join(',');
       try {
         console.log('getData try...');
-        // this.eventData = await fetch("https://eonet.sci.gsfc.nasa.gov/api/v3/events?limit=5&days=20&category=wildfires")
+        // this.eventData = await fetch("https://eonet.gsfc.nasa.gov/api/v3/events?limit=5&days=20&category=wildfires")
         //   .then(response => response.json())
         //   .then(data => data.events);
         let res = await fetch(`${this.url_base}events?status=${this.status}&category=${categoriesString}&days=${this.days}&start=${start}&end=${end}&api_key=${this.api_key}`);
