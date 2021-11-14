@@ -1,10 +1,24 @@
 <template>
   <v-app>
     <header>
-      <a href="/">Natural Events</a>
-      <nav>
-        <li><a href="https://github.com/blsmxiu47/natural-events">GitHub</a></li>
-        <li><a href="https://eonet.gsfc.nasa.gov/">EONET</a></li>
+      <v-toolbar-title>
+      <a class="app-title" href="/"><h1>Natural Events</h1></a>
+      </v-toolbar-title>
+      <nav class="collapse">
+        <!-- <v-app-bar 
+          dense
+          dark
+          color=rgb(0,40,60)
+        > -->
+        <ul class="navbar-nav" id="topNav">
+          <li><a class="nav-link" href="https://github.com/blsmxiu47/natural-events">GitHub</a></li>
+          <li><a class="nav-link" href="https://eonet.gsfc.nasa.gov/">EONET</a></li>
+          <!-- <v-app-bar-nav-icon class="hamburger" @click="expandCollapse"></v-app-bar-nav-icon> -->
+          <v-btn class="hamburger" @click="expandCollapse">
+            <i class="iconify" data-icon="cil:hamburger-menu"></i>
+          </v-btn>
+        </ul>
+        <!-- </v-app-bar> -->
       </nav>
     </header>
     <Menu @update-data="updateData" :categories="categories" :defaultDates="dates" />
@@ -80,6 +94,14 @@ export default {
       this.dates = dates;
       // this.getData(dates[0], dates[1]);
     },
+    expandCollapse() {
+      let topNav = document.getElementById("topNav");
+      if (topNav.className === "navbar-nav") {
+        topNav.className += " responsive";
+      } else {
+        topNav.className = "navbar-nav";
+      }
+    },
   },
   created () {
     this.getData(this.dates[0], this.dates[1]);
@@ -96,6 +118,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
