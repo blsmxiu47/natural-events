@@ -4,16 +4,7 @@
       <div class="top-header">
         <a class="app-title" href="/"><h1>Natural Events</h1></a>
         <Menu @update-data="updateData" :categories="categories" :defaultDates="dates" />
-        <!-- to be replaced with "Info" component: -->
-        <nav class="collapse">
-          <ul class="navbar-nav" id="topNav">
-            <li><a class="nav-link" href="https://github.com/blsmxiu47/natural-events">GitHub</a></li>
-            <li><a class="nav-link" href="https://eonet.gsfc.nasa.gov/">EONET</a></li>
-            <v-btn icon class="info-button">
-              <Icon icon="feather:info" @click="expandCollapse"/>
-            </v-btn>
-          </ul>
-        </nav>
+        <Info />
       </div>
     </header>
     <Map v-if="!loading" :events="events" :categories="categories" :dates="dates" />
@@ -22,8 +13,8 @@
 </template>
 
 <script>
-import { Icon } from '@iconify/vue2';
 import Menu from './components/Menu.vue'
+import Info from './components/Info.vue'
 import Map from './components/Map.vue';
 import EventsLog from './components/EventsLog.vue';
 
@@ -31,9 +22,9 @@ export default {
   name: 'App',
   components: {
     Menu,
+    Info,
     Map,
     EventsLog,
-    Icon,
   },
   data () {
     return {
@@ -78,16 +69,6 @@ export default {
     updateData (dates) {
       console.log('App updateData...', dates);
       this.dates = dates;
-    },
-    expandCollapse() {
-      console.log('expandCollapse...');
-      console.log(document);
-      let topNav = document.getElementById("topNav");
-      if (topNav.className === "navbar-nav") {
-        topNav.className += " responsive";
-      } else {
-        topNav.className = "navbar-nav";
-      }
     },
   },
   created () {
