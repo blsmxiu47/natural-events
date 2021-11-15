@@ -6,11 +6,6 @@
       offset-y
     >
       <template v-slot:activator="{ on, attrs }">
-        <!-- <v-btn
-          color=rgb(0,40,60)
-          v-bind="attrs"
-          v-on="on"
-        > -->
         <v-btn
         class="filter-button"
         icon
@@ -19,7 +14,6 @@
         >
           <Icon class="filter-icon" icon="mdi:filter" />
         </v-btn>
-        <!-- </v-btn> -->
       </template>
       <v-card>
         <h1>Parameters</h1>
@@ -79,22 +73,6 @@ export default {
   data () {
       return {
           menu: false,
-        //   updated: false,
-          // categories: {'seaLakeIce': true, 'wildfires': true, 'severeStorms': true, 'volcanoes': true},
-          // categories: 
-          // ['drought', 
-          // 'dustHaze', 
-          // 'earthquakes', 
-          // 'floods', 
-          // 'landslides', 
-          // 'manmade', 
-          // 'seaLakeIce', 
-          // 'severeStorms', 
-          // 'snow', 
-          // 'tempExtremes', 
-          // 'volcanoes', 
-          // 'waterColor', 
-          // 'wildfires'],
           dates: this.defaultDates,
       }
   },
