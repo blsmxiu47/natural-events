@@ -4,16 +4,17 @@
       <div class="top-header">
         <a class="app-title" href="/"><h1>Natural Events</h1></a>
         <Menu @update-data="updateData" :categories="categories" :defaultDates="dates" />
+        <!-- to be replaced with "Info" component: -->
+        <nav class="collapse">
+          <ul class="navbar-nav" id="topNav">
+            <li><a class="nav-link" href="https://github.com/blsmxiu47/natural-events">GitHub</a></li>
+            <li><a class="nav-link" href="https://eonet.gsfc.nasa.gov/">EONET</a></li>
+            <v-btn icon class="info-button">
+              <Icon icon="feather:info" @click="expandCollapse"/>
+            </v-btn>
+          </ul>
+        </nav>
       </div>
-      <nav class="collapse">
-        <ul class="navbar-nav" id="topNav">
-          <li><a class="nav-link" href="https://github.com/blsmxiu47/natural-events">GitHub</a></li>
-          <li><a class="nav-link" href="https://eonet.gsfc.nasa.gov/">EONET</a></li>
-          <v-btn icon class="hamburger">
-            <Icon icon="cil:hamburger-menu" @click="expandCollapse"/>
-          </v-btn>
-        </ul>
-      </nav>
     </header>
     <Map v-if="!loading" :events="events" :categories="categories" :dates="dates" />
     <EventsLog v-if="!loading" :events="events" />
