@@ -1,9 +1,10 @@
 <template>
   <v-app>
     <header>
-      <v-toolbar-title>
-      <a class="app-title" href="/"><h1>Natural Events</h1></a>
-      </v-toolbar-title>
+      <div class="top-header">
+        <a class="app-title" href="/"><h1>Natural Events</h1></a>
+        <Menu @update-data="updateData" :categories="categories" :defaultDates="dates" />
+      </div>
       <nav class="collapse">
         <!-- <v-app-bar 
           dense
@@ -14,20 +15,21 @@
           <li><a class="nav-link" href="https://github.com/blsmxiu47/natural-events">GitHub</a></li>
           <li><a class="nav-link" href="https://eonet.gsfc.nasa.gov/">EONET</a></li>
           <!-- <v-app-bar-nav-icon class="hamburger" @click="expandCollapse"></v-app-bar-nav-icon> -->
-          <v-btn class="hamburger" @click="expandCollapse">
-            <i class="iconify" data-icon="cil:hamburger-menu"></i>
+          <v-btn icon class="hamburger">
+            <Icon icon="cil:hamburger-menu" @click="expandCollapse"/>
           </v-btn>
         </ul>
         <!-- </v-app-bar> -->
       </nav>
     </header>
-    <Menu @update-data="updateData" :categories="categories" :defaultDates="dates" />
+    
     <Map v-if="!loading" :events="events" :categories="categories" :dates="dates" />
     <EventsLog v-if="!loading" :events="events" />
   </v-app>
 </template>
 
 <script>
+import { Icon } from '@iconify/vue2';
 import Menu from './components/Menu.vue'
 import Map from './components/Map.vue';
 import EventsLog from './components/EventsLog.vue';
@@ -38,6 +40,7 @@ export default {
     Menu,
     Map,
     EventsLog,
+    Icon,
   },
   data () {
     return {
@@ -95,6 +98,8 @@ export default {
       // this.getData(dates[0], dates[1]);
     },
     expandCollapse() {
+      console.log('expandCollapse...');
+      console.log(document);
       let topNav = document.getElementById("topNav");
       if (topNav.className === "navbar-nav") {
         topNav.className += " responsive";

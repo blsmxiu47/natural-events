@@ -3,6 +3,7 @@
   .navbar-nav a.hamburger {
     float: right;
     display: block;
+    padding: .5rem 1rem;
   }
 }
 @media screen and (max-width: 600px) {
@@ -42,12 +43,18 @@
 }
 
 /* Hide the link that should open and close the topnav on small screens */
-.navbar-nav .hamburger {
+/* .navbar-nav .hamburger {
   display: none;
+} */
+
+.top-header {
+  display: flex;
+  padding: .5rem 1rem;
 }
 
 .app-title {
   text-decoration: none;
+  margin: auto;
 }
 
 .app-title > h1 {
@@ -71,10 +78,6 @@
 } 
 
 
-.app-title {
-  margin: auto;
-}
-
 .location-icon {
   position: relative;
   font-size: 1.3rem;
@@ -96,16 +99,16 @@
   color: #000;
 }
 
-.menu-icon {
-  font-size: 1rem;
+.filter-button {
+  background-color: none;
+}
+
+.filter-icon {
+  font-size: 1.5rem;
 }
 
 .menu {
   position: relative;
-  margin-left: auto;
-  margin-right: 0;
-  /* top: 24px;
-  left: 0; */
   z-index: 1000;
 }
 

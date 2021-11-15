@@ -3,19 +3,23 @@
     <v-menu
       v-model="menu"
       :close-on-content-click="false"
-      :nudge-width="200"
-      offset-x
-      right
+      offset-y
     >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="indigo"
-          dark
+        <!-- <v-btn
+          color=rgb(0,40,60)
           v-bind="attrs"
           v-on="on"
+        > -->
+        <v-btn
+        class="filter-button"
+        icon
+        v-bind="attrs"
+        v-on="on"
         >
-          Filter Events
+          <Icon class="filter-icon" icon="mdi:filter" />
         </v-btn>
+        <!-- </v-btn> -->
       </template>
       <v-card>
         <h1>Parameters</h1>
@@ -57,7 +61,7 @@
 </template>
 
 <script>
-// import { Icon } from '@iconify/vue2';
+import { Icon } from '@iconify/vue2';
 import DatePicker from './DatePicker.vue'
 import CategoryListItem from './CategoryListItem.vue'
 
@@ -70,6 +74,7 @@ export default {
   components: {
       DatePicker,
       CategoryListItem,
+      Icon,
   },
   data () {
       return {
