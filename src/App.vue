@@ -2,8 +2,8 @@
   <v-app>
     <header>
       <div class="top-header">
-        <a class="app-title" href="/"><h1>Natural Events</h1></a>
         <Menu @update-data="updateData" :categories="categories" :defaultDates="dates" />
+        <a class="app-title" href="/"><h1>Natural Events</h1></a>
         <Info />
       </div>
     </header>

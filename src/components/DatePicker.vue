@@ -6,9 +6,11 @@
       <v-date-picker
         v-model="dates"
         range
-        color=rgba(0,200,200,1)
+        color=rgba(100,100,100,.5)
         first-day-of-week=1
-        width=100%
+        width=290px
+        prev-icon="mdi-chevron-left"
+        next-icon="mdi-chevron-right"
       ></v-date-picker>
     </v-col>
     <v-col
@@ -20,7 +22,6 @@
         prepend-icon="mdi-calendar"
         readonly
       ></v-text-field>
-      model: {{ dates }}
     </v-col>
   </v-row>
 </template>

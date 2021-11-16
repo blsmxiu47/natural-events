@@ -16,38 +16,36 @@
         </v-btn>
       </template>
       <v-card>
-        <h1>Parameters</h1>
+        <h2>Filter Events</h2>
         <v-divider></v-divider>
-        <v-row>
+        <v-row class="menu-content">
           <v-col
-          cols="6"
-          sm="6">
+          col="12"
+          md="6">
+            <h3>Event Categories</h3>
             <v-list>
               <CategoryListItem @update-category="updateCategory" v-for="category in Object.keys(categories)" :key="category" :category="category" />
             </v-list>
           </v-col>
           <v-col
-          cols="6"
-          sm="6">
-            <DatePicker @update-date-range="updateDateRange" :defaultDates="defaultDates" />
+          col="12"
+          md="6">
+            <h3>Date Range</h3>
+            <v-row >
+              <DatePicker @update-date-range="updateDateRange" :defaultDates="defaultDates" />
+            </v-row>
+            <v-row>
+              <v-card-actions class="center-all">
+                <v-btn
+                color="primary"
+                text
+                @click="updateData"
+                >
+                  Update Dates
+                </v-btn>
+              </v-card-actions>
+            </v-row>
           </v-col>
-        </v-row>
-        <v-row>
-          <v-card-actions class="center-all">
-            <v-btn
-            text
-            @click="menu = false"
-            >
-              Cancel
-            </v-btn>
-            <v-btn
-            color="primary"
-            text
-            @click="updateData"
-            >
-              Update
-            </v-btn>
-          </v-card-actions>
         </v-row>
       </v-card>
     </v-menu>
