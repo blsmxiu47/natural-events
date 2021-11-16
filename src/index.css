@@ -68,6 +68,9 @@
   margin-right: auto;
 }
 
+.info-nav {
+  z-index: 1000;
+}
 
 /* Map Icons */
 .location-icon {

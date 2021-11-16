@@ -1,13 +1,15 @@
 <template>
   <div class="">
-    <v-btn icon class="info-button">
-      <Icon icon="feather:info" @click.stop="drawer != drawer"/>
+    <v-btn icon class="info-button" @click.stop="drawer = !drawer">
+      <Icon icon="feather:info" />
     </v-btn>
     <v-navigation-drawer
     class="info-nav"
     v-model="drawer"
     absolute
-    temporary>
+    temporary
+    right
+    height=auto>
       <v-list>
         <v-list-item v-for="item in items" :key="item.title" :href="item.href">
           <v-list-item-icon>
