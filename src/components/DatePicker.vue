@@ -1,28 +1,22 @@
 <template>
   <v-row>
-    <v-col
-    cols="12"
-    lg="6">
-      <v-date-picker
-        v-model="dates"
-        range
-        color=rgba(100,100,100,.5)
-        first-day-of-week=1
-        width=290px
-        prev-icon="mdi-chevron-left"
-        next-icon="mdi-chevron-right"
-      ></v-date-picker>
-    </v-col>
-    <v-col
-    cols="12"
-    lg="6">
-      <v-text-field
-        v-model="dateRangeText"
-        label="Date range"
-        prepend-icon="mdi-calendar"
-        readonly
-      ></v-text-field>
-    </v-col>
+    <v-date-picker
+      class="center"
+      v-model="dates"
+      range
+      color=rgba(100,100,100,.5)
+      first-day-of-week=1
+      width=290px
+      prev-icon="mdi-chevron-left"
+      next-icon="mdi-chevron-right"
+    ></v-date-picker>
+    <v-text-field
+      class="center"
+      v-model="dateRangeText"
+      label="Date range"
+      prepend-icon="mdi-calendar"
+      readonly
+    ></v-text-field>
   </v-row>
 </template>
 

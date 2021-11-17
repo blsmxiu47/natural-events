@@ -58,6 +58,10 @@
   font-size: 1.5rem;
 }
 
+.v-menu__content {
+  top: 44px !important;
+}
+
 .menu {
   position: relative;
   z-index: 1000;
@@ -67,14 +71,16 @@
   margin: 0;
 }
 
-.center-all {
-  margin-left: auto;
-  margin-right: auto;
+.center {
+  margin: auto;
 }
 
+
+/* Info Nav */
 .info-nav {
   z-index: 1000;
 }
+
 
 /* Map Icons */
 .location-icon {

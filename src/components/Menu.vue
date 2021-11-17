@@ -31,11 +31,9 @@
           col="12"
           md="6">
             <h3>Date Range</h3>
-            <v-row >
-              <DatePicker @update-date-range="updateDateRange" :defaultDates="defaultDates" />
-            </v-row>
+            <DatePicker @update-date-range="updateDateRange" :defaultDates="defaultDates" />
             <v-row>
-              <v-card-actions class="center-all">
+              <v-card-actions class="center">
                 <v-btn
                 color="primary"
                 text
