@@ -14,21 +14,11 @@ import Vue from 'vue';
 
 export default {
   name: 'Map',
-  props: ['events', 'categories', 'dates'],
+  props: ['filteredEvents'],
   watch: {
-    // temporary; there's gotta be a better way to do this. Either lifecycle hook, Comp API, or just watching one prop representing menu updated
-    events () {
-      this.setCoordinates(this.events, this.categories, this.dates);
+    filteredEvents () {
+      this.setCoordinates(this.filteredEvents);
     },
-    categories: {
-      handler: function () {
-        this.setCoordinates(this.events, this.categories, this.dates);
-      },
-      deep: true,
-    },
-    dates () {
-      this.setCoordinates(this.events, this.categories, this.dates);
-    }
   },
   components: {
     LMap,
@@ -45,96 +35,24 @@ export default {
       markers: [],
     }
   },
-  // computed: {
-  //   getEvents () {
-  //     return this.events;
-  //   },
-  //   getCategories () {
-  //     return this.categories;
-  //   },
-  //   getDates () {
-  //     return this.dates;
-  //   }
-  // },
   methods: {
-    setCoordinates (events, categories, dates) {
-      console.log("setCoordinates...");
-      // console.log("categories: ", categories)
-      // console.log("dates: ", dates)
-      // how not to do this I hope(?) dbl for-loop ver...
+    setCoordinates (filteredEvents) {
+      console.log("setCoordinates...", filteredEvents);
       let markers = [];
-      for (const ev of events) {
-        if (ev.categories[0].id) {
-          if (categories[ev.categories[0].id]) {
-            let numGeos = ev.geometry.length;
-            for (const geo of ev.geometry) {
-              if (geo.date >= dates[0] && geo.date <= dates[1]) {
-                const geoData = [
-                  ev.id, 
-                  ev.categories[0].id, 
-                  ev.title,
-                  geo.coordinates.reverse(), 
-                  geo.date, 
-                  geo.magnitudeUnit, 
-                  geo.magnitudeValue, 
-                  (ev.geometry.indexOf(geo)+1) / numGeos,
-                  ];
-                let instance = Vue.component('iconrender', {
-                  render () {
-                    return <LocationMarker context={geoData} />
-                  }
-                })
-                markers.push(instance);
-              }
-            }
+      for (const ev of filteredEvents) {
+        let instance = Vue.component('iconrender', {
+          render () {
+            return <LocationMarker context={ev} />
           }
-        } else {
-          let evCat = ev.categories.replace(/\s+/g, "").replace(/(and)+/g, "");
-          evCat = evCat.charAt(0).toLowerCase() + evCat.slice(1);
-          if (categories[evCat]) {
-            let numGeos = ev.geometry.length;
-            for (const geo of ev.geometry) {
-              if (geo.date.slice(0, 10) >= dates[0] && geo.date.slice(0, 10) <= dates[1]) {
-                const geoData = [
-                  ev.id, 
-                  evCat, 
-                  ev.title,
-                  geo.coordinates, 
-                  geo.date, 
-                  geo.magnitudeUnit, 
-                  geo.magnitudeValue, 
-                  (ev.geometry.indexOf(geo)+1) / numGeos,
-                  ];
-                let instance = Vue.component('iconrender', {
-                  render () {
-                    return <LocationMarker context={geoData} />
-                  }
-                })
-                markers.push(instance);
-              }
-            }
-          }
-        }
+        })
+        markers.push(instance);
       }
-      // console.log(geometries.slice(0,10))
-      // const markers = events.map(el => {
-      //     for (let i = 0; i < el.geometry.length; i++) {
-      //       let instance = Vue.component('iconrender', {
-      //         render () {
-      //           let latlng = [el.geometry[i].coordinates[1], el.geometry[i].coordinates[0]]
-      //           let context = [el.id, "seaLakeIce", el.title, el.geometry[i].date]
-      //           return <LocationMarker latlng={latlng} context={context} />
-      //         }
-      //       })
-      //       return instance
-      //     }
-      //   }
       this.markers = markers
     },
   },
   mounted () {
     console.log('mounted... setCoordinates...');
-    this.setCoordinates(this.events, this.categories, this.dates);
+    this.setCoordinates(this.filteredEvents);
     // this.$root.$on('update-data', data => {
     //   this.setCoordinates(this.events, data[0], data[1])
     // })

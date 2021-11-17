@@ -7,7 +7,7 @@
         <Info />
       </div>
     </header>
-    <Map v-if="!loading" :events="events" :categories="categories" :dates="dates" />
+    <Map v-if="!loading" :filteredEvents="filteredEvents" />
     <EventsLog v-if="!loading" :events="events" />
   </v-app>
 </template>
@@ -17,6 +17,7 @@ import Menu from './components/Menu.vue'
 import Info from './components/Info.vue'
 import Map from './components/Map.vue';
 import EventsLog from './components/EventsLog.vue';
+import eventsTransform from './utils/EventsTransform.js';
 
 export default {
   name: 'App',
@@ -37,6 +38,11 @@ export default {
       events: [],
       loading: true,
     }
+  },
+  computed: {
+    filteredEvents () {
+      return eventsTransform(this.events, this.categories, this.dates);
+    },
   },
   methods: {
     async getData(start, end) {
