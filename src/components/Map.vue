@@ -37,7 +37,6 @@ export default {
   },
   methods: {
     setCoordinates (filteredEvents) {
-      console.log("setCoordinates...", filteredEvents);
       let markers = [];
       for (const ev of filteredEvents) {
         let instance = Vue.component('iconrender', {
@@ -53,13 +52,6 @@ export default {
   mounted () {
     console.log('mounted... setCoordinates...');
     this.setCoordinates(this.filteredEvents);
-    // this.$root.$on('update-data', data => {
-    //   this.setCoordinates(this.events, data[0], data[1])
-    // })
   }, 
-  // updated () {
-  //   console.log('updated... setCoordinates...');
-  //   this.setCoordinates(this.events);
-  // }
 }
 </script>
