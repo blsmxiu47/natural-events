@@ -94,7 +94,7 @@ export default {
           if (categories[evCat]) {
             let numGeos = ev.geometry.length;
             for (const geo of ev.geometry) {
-              if (geo.date >= dates[0] && geo.date <= dates[1]) {
+              if (geo.date.slice(0, 10) >= dates[0] && geo.date.slice(0, 10) <= dates[1]) {
                 const geoData = [
                   ev.id, 
                   evCat, 
