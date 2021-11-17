@@ -8,7 +8,7 @@
       </div>
     </header>
     <Map v-if="!loading" :filteredEvents="filteredEvents" />
-    <EventsLog v-if="!loading" :events="events" />
+    <EventsLog v-if="!loading" :filteredEvents="filteredEvents" />
   </v-app>
 </template>
 

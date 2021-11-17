@@ -17,6 +17,8 @@ const eventsTransform = (events, categories, dates) => {
                             geo.magnitudeUnit, 
                             geo.magnitudeValue, 
                             (ev.geometry.indexOf(geo)+1) / numGeos,
+                            ev.sources[0].id,
+                            ev.sources[0].url,
                         ];
                         // yield geoData; maybe later
                         eventsData.push(geoData);

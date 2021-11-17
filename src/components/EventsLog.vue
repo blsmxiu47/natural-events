@@ -2,7 +2,7 @@
     <div>
       <v-data-table
         :headers="headers"
-        :items="events"
+        :items="eventsData"
         item-key="id"
         class="elevation-1"
       >
@@ -13,48 +13,36 @@
 <script>
 export default {
   name: 'EventsLog',
-  props: ['events'],
-  data () {
-    return {
-      eventsData: [],
-    }
-  },
-  methods: {
-    setEvents (events) {
-      console.log('setEvents...')
-      this.eventsData = events
-      for(let i = 0; i < events.length; i++) {
-        if (events[i].categories.constructor === Array) {
-          events[i].categories = events[i].categories.map(el => el.title).join()
-        }
-        if (events[i].sources.constructor === Array) {
-          events[i].sources = events[i].sources.map(el => el.id).join();
-        }
-        events[i].dateTimes = events[i].geometry.map(el => el.date).join(' | ')
-        events[i].geo = events[i].geometry.map(el => '[' + [el.coordinates[1], el.coordinates[0]].join() + ']').join(' | ');
-      }
-    }
-  },
+  props: ['filteredEvents'],
   computed: {
+    eventsData () {
+      console.log('setEvents...', this.filteredEvents);
+      console.log(this.filteredEvents[0])
+      return this.filteredEvents.map(ev => {
+        return {
+          eventId: ev[0],
+          category: ev[1],
+          title: ev[2],
+          dateTime: ev[4],
+          geo: ev[3],
+          source: ev[8],
+          url: ev[9],
+          magnitude: [ev[6], ev[5]].join(''),
+        }
+      })
+    },
     headers () {
       return [
-        {text: 'Event ID', value: 'id'},
-        {text: 'Category', value: 'categories'},
+        {text: 'Geo ID', value: 'id'},
+        {text: 'Event ID', value: 'eventId'},
+        {text: 'Category', value: 'category'},
         {text: 'Event Name', value: 'title'},
-        {text: 'Event Date/Time', value: 'dateTimes'},
+        {text: 'Event Date/Time', value: 'dateTime'},
         {text: 'Event Coordinates', value: 'geo'},
-        {text: 'Link', value: 'link'},
-        {text: 'Sources', value: 'sources'},
+        {text: 'Source', value: 'source'},
+        {text: 'Link', value: 'url'},
       ]
     }
   },
-  mounted () {
-    console.log('mounted... setEvents...');
-    this.setEvents(this.events);
-  },
-  updated () {
-    console.log('updated... setEvents...');
-    this.setEvents(this.events);
-  }
 }
 </script>
