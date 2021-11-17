@@ -24,7 +24,7 @@ export default {
           category: ev[1],
           title: ev[2],
           dateTime: ev[4],
-          geo: ev[3],
+          geo: ev[3].map(el => Math.round((el + Number.EPSILON) * 100) / 100),
           source: ev[8],
           url: ev[9],
           magnitude: [ev[6], ev[5]].join(''),
