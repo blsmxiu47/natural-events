@@ -18,6 +18,7 @@ import Info from './components/Info.vue'
 import Map from './components/Map.vue';
 import EventsLog from './components/EventsLog.vue';
 import eventsTransform from './utils/EventsTransform.js';
+import eventsFilter from './utils/EventsFilter.js';
 
 export default {
   name: 'App',
@@ -41,7 +42,7 @@ export default {
   },
   computed: {
     filteredEvents () {
-      return eventsTransform(this.events, this.categories, this.dates);
+      return eventsFilter(this.events, this.categories, this.dates);
     },
   },
   methods: {
@@ -61,7 +62,7 @@ export default {
       }
     },
     setResults (result) {
-      this.events = result;
+      this.events = eventsTransform(result);
     },
     getToday () {
       let today = new Date().toISOString().slice(0, 10)
