@@ -22,7 +22,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .tooltip-box { 
   position: relative;
   display: inline-block;

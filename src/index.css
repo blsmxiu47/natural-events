@@ -1,22 +1,5 @@
-/* App Header and Title */
-.top-header {
-  display: flex;
-  padding: .5rem 1rem;
-}
-
-.app-title {
-  text-decoration: none;
-  margin: auto;
-}
-
-.app-title > h1 {
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  color: rgb(0,50,75);
-}
-
-
 /* Top Nav */
-.navbar {
+/* .navbar {
   padding: .5rem 1rem;
 }
 
@@ -46,26 +29,7 @@
 .nav-link:hover {
   background-color: #ddd;
   color: black;
-}
-
-
-/* Filter Menu */
-.filter-button {
-  background-color: none;
-}
-
-.filter-icon {
-  font-size: 1.5rem;
-}
-
-.v-menu__content {
-  top: 44px !important;
-}
-
-.menu {
-  position: relative;
-  z-index: 1000;
-}
+} */
 
 .row {
   margin: 0;
@@ -73,33 +37,4 @@
 
 .center {
   margin: auto;
-}
-
-
-/* Info Nav */
-.info-nav {
-  z-index: 1000;
-}
-
-
-/* Map Icons */
-.location-icon {
-  position: relative;
-  font-size: 1.3rem;
-}
-
-.storm-icon {
-  color: orange;
-}
-
-.volcano-icon {
-  color: indigo;
-}
-
-.wildfire-icon {
-  color: red;
-}
-
-.location-icon:hover {
-  color: #000;
 }

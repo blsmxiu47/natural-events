@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <v-btn icon class="info-button" @click.stop="drawer = !drawer">
-      <Icon icon="feather:info" />
+      <Icon class="info-icon" icon="feather:info" />
     </v-btn>
     <v-navigation-drawer
     class="info-nav"
@@ -43,3 +43,18 @@
     },
   }
 </script>
+
+<style lang="scss" scoped>
+.info-nav {
+  z-index: 1000;
+}
+
+.info-button {
+  margin: 0;
+}
+
+.info-icon {
+  color: $theme-white;
+  font-size: 1.5rem;
+}
+</style>

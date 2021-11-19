@@ -53,7 +53,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .location-icon {
   opacity: var(--icon-opacity);
 }
@@ -76,5 +76,26 @@ export default {
 
 .tooltip li {
   padding: 2px 0;
+}
+
+.location-icon {
+  position: relative;
+  font-size: 1.3rem;
+}
+
+.storm-icon {
+  color: orange;
+}
+
+.volcano-icon {
+  color: indigo;
+}
+
+.wildfire-icon {
+  color: red;
+}
+
+.location-icon:hover {
+  color: #000;
 }
 </style>

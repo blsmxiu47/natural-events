@@ -90,3 +90,23 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.filter-button {
+  background-color: none;
+}
+
+.filter-icon {
+  font-size: 1.5rem;
+  color: $theme-white;
+}
+
+.v-menu__content {
+  top: 44px !important;
+}
+
+.menu {
+  position: relative;
+  z-index: 1000;
+}
+</style>
