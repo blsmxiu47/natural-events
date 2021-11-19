@@ -18,7 +18,7 @@
       <v-card>
         <h2>Filter Events</h2>
         <v-divider></v-divider>
-        <v-row class="menu-content">
+        <v-row>
           <v-col
           col="12"
           md="6">

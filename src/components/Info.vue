@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <v-btn icon class="info-button" @click.stop="drawer = !drawer">
       <Icon class="info-icon" icon="feather:info" />
     </v-btn>

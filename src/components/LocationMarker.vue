@@ -56,6 +56,11 @@ export default {
 <style lang="scss" scoped>
 .location-icon {
   opacity: var(--icon-opacity);
+  position: relative;
+  font-size: 1.3rem;
+  :hover {
+    color: #000;
+  }
 }
 
 .tooltip { 
@@ -66,21 +71,14 @@ export default {
   height: auto;
   padding: 5px 25px;
   border-radius: 10px;
-}
-
-.tooltip ul {
-  list-style: none;
-  text-align: left;
-  padding: 5px 0;
-}
-
-.tooltip li {
-  padding: 2px 0;
-}
-
-.location-icon {
-  position: relative;
-  font-size: 1.3rem;
+  ul {
+    list-style: none;
+    text-align: left;
+    padding: 5px 0;
+  }
+  li {
+    padding: 2px 0;
+  }
 }
 
 .storm-icon {
@@ -95,7 +93,4 @@ export default {
   color: red;
 }
 
-.location-icon:hover {
-  color: #000;
-}
 </style>
