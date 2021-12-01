@@ -13,7 +13,7 @@ import LocationMarker from './LocationMarker.vue'
 import Vue from 'vue'
 
 export default {
-  name: 'Map',
+  name: 'EventsMap',
   props: ['filteredEvents'],
   watch: {
     filteredEvents () {
@@ -39,7 +39,7 @@ export default {
     setCoordinates (filteredEvents) {
       const markers = []
       for (const ev of filteredEvents) {
-        const instance = Vue.component('iconrender', {
+        const instance = Vue.component('IconRender', {
           render () {
             return <LocationMarker context={ev} />
           }

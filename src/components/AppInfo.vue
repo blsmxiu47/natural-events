@@ -28,7 +28,7 @@
 import { Icon } from '@iconify/vue2'
 
 export default {
-  name: 'Info',
+  name: 'AppInfo',
   components: {
     Icon
   },

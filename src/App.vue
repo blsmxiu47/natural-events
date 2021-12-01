@@ -2,20 +2,20 @@
   <v-app>
     <header>
       <div class="top-header">
-        <Menu @update-data="updateData" :categories="categories" :defaultDates="dates" />
+        <FilterMenu @update-category="updateCategory" @update-data="updateData" :categories="categories" :defaultDates="dates" />
         <a class="app-title" href="/"><h1>Natural Events</h1></a>
-        <Info />
+        <AppInfo />
       </div>
     </header>
-    <Map v-if="!loading" :filteredEvents="filteredEvents" />
+    <EventsMap v-if="!loading" :filteredEvents="filteredEvents" />
     <EventsLog v-if="!loading" :filteredEvents="filteredEvents" />
   </v-app>
 </template>
 
 <script>
-import Menu from './components/Menu.vue'
-import Info from './components/Info.vue'
-import Map from './components/Map.vue'
+import FilterMenu from './components/FilterMenu.vue'
+import AppInfo from './components/AppInfo.vue'
+import EventsMap from './components/EventsMap.vue'
 import EventsLog from './components/EventsLog.vue'
 import eventsTransform from './utils/EventsTransform.js'
 import eventsFilter from './utils/EventsFilter.js'
@@ -23,9 +23,9 @@ import eventsFilter from './utils/EventsFilter.js'
 export default {
   name: 'App',
   components: {
-    Menu,
-    Info,
-    Map,
+    FilterMenu,
+    AppInfo,
+    EventsMap,
     EventsLog
   },
   data () {
@@ -55,7 +55,7 @@ export default {
         this.setResults(events.events)
         this.loading = false
       } catch (error) {
-        console.log(error)
+        alert(error)
       }
     },
     setResults (result) {
@@ -69,6 +69,9 @@ export default {
       const start = new Date()
       start.setDate(start.getDate() - daysPrior)
       return start.toISOString().slice(0, 10)
+    },
+    updateCategory (category, show) {
+      this.categories[category] = show
     },
     updateData (dates) {
       this.dates = dates

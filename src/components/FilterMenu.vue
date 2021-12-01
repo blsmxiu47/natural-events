@@ -56,7 +56,7 @@ import DatePicker from './DatePicker.vue'
 import CategoryListItem from './CategoryListItem.vue'
 
 export default {
-  name: 'Menu',
+  name: 'FilterMenu',
   props: {
     categories: Object,
     defaultDates: Array
@@ -77,7 +77,7 @@ export default {
       this.dates = dates
     },
     updateCategory (category, show) {
-      this.categories[category] = show
+      this.$emit('update-category', category, show)
     },
     updateData () {
       this.$emit('update-data', this.dates)
