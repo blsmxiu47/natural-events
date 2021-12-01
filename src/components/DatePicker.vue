@@ -21,30 +21,28 @@
 </template>
 
 <script>
-  export default {
-    name: 'DatePicker',
-    props: {
-      defaultDates: Array,
-    },
-    data () {
-      return {
-          dates: this.defaultDates,
-        }
-    },
-    computed: {
-      dateRangeText () {
-        return this.dates.join(' ~ ')
-      },
-    },
-    methods: {
-      updateDateRange () {
-        this.$emit('update-date-range', this.dates);
-        console.log('emitting updateDateRange...', this.dates);
-      },
-    },
-    updated () {
-      this.updateDateRange();
-      console.log("DatePicker updated...");
+export default {
+  name: 'DatePicker',
+  props: {
+    defaultDates: Array
+  },
+  data () {
+    return {
+      dates: this.defaultDates
     }
+  },
+  computed: {
+    dateRangeText () {
+      return this.dates.join(' ~ ')
+    }
+  },
+  methods: {
+    updateDateRange () {
+      this.$emit('update-date-range', this.dates)
+    }
+  },
+  updated () {
+    this.updateDateRange()
   }
+}
 </script>

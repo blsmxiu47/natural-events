@@ -16,8 +16,6 @@ export default {
   props: ['filteredEvents'],
   computed: {
     eventsData () {
-      console.log('setEvents...', this.filteredEvents);
-      console.log(this.filteredEvents[0])
       return this.filteredEvents.map(ev => {
         return {
           eventId: ev[0],
@@ -27,22 +25,22 @@ export default {
           geo: ev[3].map(el => Math.round((el + Number.EPSILON) * 100) / 100),
           source: ev[8],
           url: ev[9],
-          magnitude: [ev[6], ev[5]].join(''),
+          magnitude: [ev[6], ev[5]].join('')
         }
       })
     },
     headers () {
       return [
-        {text: 'Geo ID', value: 'id'},
-        {text: 'Event ID', value: 'eventId'},
-        {text: 'Category', value: 'category'},
-        {text: 'Event Name', value: 'title'},
-        {text: 'Event Date/Time', value: 'dateTime'},
-        {text: 'Event Coordinates', value: 'geo'},
-        {text: 'Source', value: 'source'},
-        {text: 'Link', value: 'url'},
+        { text: 'Geo ID', value: 'id' },
+        { text: 'Event ID', value: 'eventId' },
+        { text: 'Category', value: 'category' },
+        { text: 'Event Name', value: 'title' },
+        { text: 'Event Date/Time', value: 'dateTime' },
+        { text: 'Event Coordinates', value: 'geo' },
+        { text: 'Source', value: 'source' },
+        { text: 'Link', value: 'url' }
       ]
     }
-  },
+  }
 }
 </script>

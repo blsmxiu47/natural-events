@@ -25,23 +25,23 @@
 </template>
 
 <script>
-  import { Icon } from '@iconify/vue2';
+import { Icon } from '@iconify/vue2'
 
-  export default {
-    name: 'Info',
-    components: {
-      Icon,
-    },
-    data () {
-      return {
-        drawer: false,
-        items: [
-          { title: 'GitHub', icon: 'akar-icons:github-fill', href: 'https://github.com/blsmxiu47/natural-events' },
-          { title: 'EONET', icon: 'akar-icons:globe', href: 'https://eonet.gsfc.nasa.gov/' },
-        ],
-      }
-    },
+export default {
+  name: 'Info',
+  components: {
+    Icon
+  },
+  data () {
+    return {
+      drawer: false,
+      items: [
+        { title: 'GitHub', icon: 'akar-icons:github-fill', href: 'https://github.com/blsmxiu47/natural-events' },
+        { title: 'EONET', icon: 'akar-icons:globe', href: 'https://eonet.gsfc.nasa.gov/' }
+      ]
+    }
   }
+}
 </script>
 
 <style lang="scss" scoped>

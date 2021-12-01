@@ -15,10 +15,10 @@
 <script>
 import Menu from './components/Menu.vue'
 import Info from './components/Info.vue'
-import Map from './components/Map.vue';
-import EventsLog from './components/EventsLog.vue';
-import eventsTransform from './utils/EventsTransform.js';
-import eventsFilter from './utils/EventsFilter.js';
+import Map from './components/Map.vue'
+import EventsLog from './components/EventsLog.vue'
+import eventsTransform from './utils/EventsTransform.js'
+import eventsFilter from './utils/EventsFilter.js'
 
 export default {
   name: 'App',
@@ -26,61 +26,57 @@ export default {
     Menu,
     Info,
     Map,
-    EventsLog,
+    EventsLog
   },
   data () {
     return {
       api_key: process.env.VUE_APP_NASA_API_KEY,
       url_base: 'https://eonet.gsfc.nasa.gov/api/v3/',
       status: 'open',
-      categories: {'seaLakeIce': true, 'wildfires': true, 'severeStorms': true, 'volcanoes': true},
+      categories: { seaLakeIce: true, wildfires: true, severeStorms: true, volcanoes: true },
       dates: ['2021-01-01', this.getToday()],
       days: null,
       events: [],
-      loading: true,
+      loading: true
     }
   },
   computed: {
     filteredEvents () {
-      return eventsFilter(this.events, this.categories, this.dates);
-    },
+      return eventsFilter(this.events, this.categories, this.dates)
+    }
   },
   methods: {
-    async getData(start, end) {
-      const categoriesString = Object.keys(this.categories).join(',');
+    async getData (start, end) {
+      const categoriesString = Object.keys(this.categories).join(',')
       try {
-        console.log('getData try...');
-        let res = await fetch(`${this.url_base}events?status=${this.status}&category=${categoriesString}&days=${this.days}&start=${start}&end=${end}&api_key=${this.api_key}`);
-        console.log("response:", res);
-        const events = await res.json();
+        const res = await fetch(`${this.url_base}events?status=${this.status}&category=${categoriesString}&days=${this.days}&start=${start}&end=${end}&api_key=${this.api_key}`)
+        const events = await res.json()
 
-        this.setResults(events.events);
-        this.loading = false;
-
+        this.setResults(events.events)
+        this.loading = false
       } catch (error) {
-          console.log(error);
+        console.log(error)
       }
     },
     setResults (result) {
-      this.events = eventsTransform(result);
+      this.events = eventsTransform(result)
     },
     getToday () {
-      let today = new Date().toISOString().slice(0, 10)
-      return today;
+      const today = new Date().toISOString().slice(0, 10)
+      return today
     },
     getStartDate (daysPrior) {
-      let start = new Date();
-      start.setDate(start.getDate() - daysPrior);
-      return start.toISOString().slice(0, 10);
+      const start = new Date()
+      start.setDate(start.getDate() - daysPrior)
+      return start.toISOString().slice(0, 10)
     },
     updateData (dates) {
-      console.log('App updateData...', dates);
-      this.dates = dates;
-    },
+      this.dates = dates
+    }
   },
   created () {
-    this.getData(this.dates[0], this.dates[1]);
-  },
+    this.getData(this.dates[0], this.dates[1])
+  }
 }
 </script>
 

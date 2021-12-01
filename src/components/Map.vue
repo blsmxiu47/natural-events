@@ -8,22 +8,22 @@
 </template>
 
 <script>
-import { LMap, LTileLayer } from 'vue2-leaflet';
-import LocationMarker from './LocationMarker.vue';
-import Vue from 'vue';
+import { LMap, LTileLayer } from 'vue2-leaflet'
+import LocationMarker from './LocationMarker.vue'
+import Vue from 'vue'
 
 export default {
   name: 'Map',
   props: ['filteredEvents'],
   watch: {
     filteredEvents () {
-      this.setCoordinates(this.filteredEvents);
-    },
+      this.setCoordinates(this.filteredEvents)
+    }
   },
   components: {
     LMap,
     LTileLayer,
-    LocationMarker,
+    LocationMarker
   },
   data () {
     return {
@@ -32,26 +32,25 @@ export default {
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       zoom: 3,
       center: [0, 0],
-      markers: [],
+      markers: []
     }
   },
   methods: {
     setCoordinates (filteredEvents) {
-      let markers = [];
+      const markers = []
       for (const ev of filteredEvents) {
-        let instance = Vue.component('iconrender', {
+        const instance = Vue.component('iconrender', {
           render () {
             return <LocationMarker context={ev} />
           }
         })
-        markers.push(instance);
+        markers.push(instance)
       }
       this.markers = markers
-    },
+    }
   },
   mounted () {
-    console.log('mounted... setCoordinates...');
-    this.setCoordinates(this.filteredEvents);
-  }, 
+    this.setCoordinates(this.filteredEvents)
+  }
 }
 </script>

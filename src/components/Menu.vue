@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { Icon } from '@iconify/vue2';
+import { Icon } from '@iconify/vue2'
 import DatePicker from './DatePicker.vue'
 import CategoryListItem from './CategoryListItem.vue'
 
@@ -59,35 +59,31 @@ export default {
   name: 'Menu',
   props: {
     categories: Object,
-    defaultDates: Array,
+    defaultDates: Array
   },
   components: {
-      DatePicker,
-      CategoryListItem,
-      Icon,
+    DatePicker,
+    CategoryListItem,
+    Icon
   },
   data () {
-      return {
-          menu: false,
-          dates: this.defaultDates,
-      }
+    return {
+      menu: false,
+      dates: this.defaultDates
+    }
   },
   methods: {
     updateDateRange (dates) {
-      console.log('Menu updateDateRange...');
-      this.dates = dates;
+      this.dates = dates
     },
     updateCategory (category, show) {
-      console.log('Menu updateCategory...');
-      this.categories[category] = show;
-      console.log("new categories:", this.categories);
+      this.categories[category] = show
     },
     updateData () {
-      console.log('updating data...', this.dates);
-      this.$emit('update-data', this.dates);
-      this.menu = false;
-    },
-  },
+      this.$emit('update-data', this.dates)
+      this.menu = false
+    }
+  }
 }
 </script>
 

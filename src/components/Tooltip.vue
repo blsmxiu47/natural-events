@@ -16,14 +16,14 @@
 <script>
 export default {
   name: 'Tooltip',
-  props: { 
-    context: [],
+  props: {
+    context: []
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
-.tooltip-box { 
+.tooltip-box {
   position: relative;
   display: inline-block;
   z-index: 601;
@@ -33,7 +33,7 @@ export default {
   opacity: 1;
 }
 
-.tooltip { 
+.tooltip {
   color: rgb(100, 40, 40);
   text-align: left;
   padding: 5px 25px;

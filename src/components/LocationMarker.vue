@@ -24,24 +24,24 @@
 </template>
 
 <script>
-import { Icon } from '@iconify/vue2';
-import { LMarker, LIcon, LTooltip } from 'vue2-leaflet';
+import { Icon } from '@iconify/vue2'
+import { LMarker, LIcon, LTooltip } from 'vue2-leaflet'
 
 export default {
   name: 'LocationMarker',
   props: {
-    context: [],
+    context: []
   },
   components: {
     Icon,
     LMarker,
     LIcon,
-    LTooltip,
+    LTooltip
   },
   computed: {
     iconOpacity () {
       return {
-        '--icon-opacity': this.context[7],
+        '--icon-opacity': this.context[7]
       }
     }
   },
@@ -63,7 +63,7 @@ export default {
   }
 }
 
-.tooltip { 
+.tooltip {
   position: relative;
   display: inline-block;
   color: rgb(100, 40, 40);

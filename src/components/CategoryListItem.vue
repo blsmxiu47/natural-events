@@ -14,22 +14,20 @@
 export default {
   name: 'CategoryListItem',
   props: {
-    category: String,
+    category: String
   },
   data () {
     return {
-      showCategory: true,
+      showCategory: true
     }
   },
   methods: {
     updateCategory () {
-      this.$emit('update-category', this.category, this.showCategory);
-      console.log('emitting updateCategory...', this.category, this.showCategory);
-    },
+      this.$emit('update-category', this.category, this.showCategory)
+    }
   },
   updated () {
-    this.updateCategory();
-    console.log("Category switch updated...");
+    this.updateCategory()
   }
 }
 </script>
